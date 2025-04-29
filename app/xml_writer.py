@@ -216,3 +216,4 @@ class XmlWriter(FileWriter):
 
             with open(output_filename, 'w', encoding = 'utf-8') as file:
                 file.write(pretty_xml)
+ 
