@@ -34,3 +34,4 @@ class XlsxDataValidator:
         if log:
             self._log(message)
         return False
+
