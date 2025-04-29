@@ -1,15 +1,20 @@
+from xlsx_data_validator import XlsxDataValidator
+
 class Dragonfly:
-    def __init__(self, file_name, dragonfly_name="Unnamed"):
+    def __init__(self, error_collector, file_name, dragonfly_name="Unnamed"):
         self.name = dragonfly_name
         self.total_count = 0
         self.file_name = file_name
         self.finalized_avg_keys = set()
+        self.xlsx_validator = XlsxDataValidator(error_collector)
 
     def add_count(self, count):
-        self.total_count += count
+        if self.xlsx_validator.is_data(count, log=False) and self.xlsx_validator.is_numeric(count, log=False):
+            self.total_count += count
 
     def add_dict(self, dict_name, key, value):
         specific_dict = self._init_data_structure(dict_name, dict)
+        value = 0 if (not self.xlsx_validator.is_data(value, log=False) and not self.xlsx_validator.is_numeric(value, log=False)) else value
 
         if key not in specific_dict:
             specific_dict[key] = value
@@ -33,6 +38,7 @@ class Dragonfly:
 
     def add_avg_source(self, dict_name, key, value):
         specific_dict = self._init_data_structure(dict_name, dict)
+        value = 0 if (not self.xlsx_validator.is_data(value, log=False) and not self.xlsx_validator.is_numeric(value, log=False)) else value
 
         if key not in specific_dict:
             specific_dict[key] = [0, 0]

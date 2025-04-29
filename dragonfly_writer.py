@@ -1,113 +1,110 @@
 from workbook_utility import WorkbookUtility
 
 class DragonflyWriter:
-    def __init__(self, dragonfly, result_file):
+    def __init__(self, dragonfly, workbook_utility):
         self.dragonfly = dragonfly
-        self.result_file = result_file
-        self.wu = WorkbookUtility(dragonfly.file_name, result_file)
-        self.ws = self.wu.ws
+        self.wu = workbook_utility
+        self.ws = self.wu.add_sheet(self.dragonfly.file_name)
 
-    # кол-во
+    # Count (quantity)
     def write_total_count(self):
-        self.ws.cell(1, self.wu.call_column(), "Всего")
+        self.ws.cell(1, self.wu.call_column(), "Total")
         self.ws.cell(1, self.wu.call_column(), self.dragonfly.total_count)
         self._add_spacing_column()
 
     def write_count_by_year(self):
-        # Вызываем текущую колонку без изменения для заголовка таблички
-        self.ws.cell(1, self.wu.current_column, "Кол-во за год")
+        # Calling current column number without changing for title
+        self.ws.cell(1, self.wu.current_column, "Quantity by year")
         self._two_column_table(self.dragonfly.count_by_year)
         self._add_spacing_column()
 
     def write_count_by_square(self):
-        self.ws.cell(1, self.wu.current_column, "Кол-во за квадрат")
+        self.ws.cell(1, self.wu.current_column, "Quantity by square")
         self._two_column_table(self.dragonfly.count_by_square)
         self._add_spacing_column()
 
     def write_square_year_count(self):
-        self.ws.cell(1, self.wu.current_column, "Динамика кол-ва на кв.")
+        self.ws.cell(1, self.wu.current_column, "Quantity dynamics throw years")
         self._three_column_table(self.dragonfly.square_year_count, "count")
         self._add_spacing_column()
 
-    # температура
+    # Temperature
     def write_avg_temp_by_year(self):
-        self.ws.cell(1, self.wu.current_column, "Средняя темп./год")
+        self.ws.cell(1, self.wu.current_column, "Avg temp. by year")
         self._two_column_table(self.dragonfly.avg_temp_by_year)
         self._add_spacing_column()
 
     def write_avg_temp_by_square(self):
-        self.ws.cell(1, self.wu.current_column, "Средняя темп./кв.")
+        self.ws.cell(1, self.wu.current_column, "Avg temp. by square")
         self._two_column_table(self.dragonfly.avg_temp_by_square)
         self._add_spacing_column()
 
     def write_square_year_temp(self):
-        self.ws.cell(1, self.wu.current_column, "Динамика темп на кв.")
+        self.ws.cell(1, self.wu.current_column, "Temp. dynamics throw years")
         self._three_column_table(self.dragonfly.square_year_temp, "temperature")
         self._add_spacing_column()
 
-    # ветер
+    # Wind
     def write_avg_wind_by_year(self):
-        self.ws.cell(1, self.wu.current_column, "Средний ветер/год")
+        self.ws.cell(1, self.wu.current_column, "Avg wind by year")
         self._two_column_table(self.dragonfly.avg_wind_by_year)
         self._add_spacing_column()
 
     def write_avg_wind_by_square(self):
-        self.ws.cell(1, self.wu.current_column, "Средний ветер/кв.")
+        self.ws.cell(1, self.wu.current_column, "Avg wind by square")
         self._two_column_table(self.dragonfly.avg_wind_by_square)
         self._add_spacing_column()
 
     def write_square_year_wind(self):
-        self.ws.cell(1, self.wu.current_column, "Динамика ветра на кв.")
+        self.ws.cell(1, self.wu.current_column, "Wind dynamics throw years")
         self._three_column_table(self.dragonfly.square_year_wind, "wind")
         self._add_spacing_column()
 
-    # облачность
-    def write_avg_cloudy_by_year(self):
-        self.ws.cell(1, self.wu.current_column, "Средняя облачн./год")
-        self._two_column_table(self.dragonfly.avg_cloudy_by_year)
+    # Clouds 
+    def write_avg_clouds_by_year(self):
+        self.ws.cell(1, self.wu.current_column, "Avg cloudiness by year")
+        self._two_column_table(self.dragonfly.avg_clouds_by_year)
         self._add_spacing_column()
 
-    def write_avg_cloudy_by_square(self):
-        self.ws.cell(1, self.wu.current_column, "Средння облачн./кв.")
-        self._two_column_table(self.dragonfly.avg_cloudy_by_square)
+    def write_avg_clouds_by_square(self):
+        self.ws.cell(1, self.wu.current_column, "Avg cloudiness by square")
+        self._two_column_table(self.dragonfly.avg_clouds_by_square)
         self._add_spacing_column()
 
-    def write_square_year_cloudy(self):
-        self.ws.cell(1, self.wu.current_column, "Динамика облачн. на кв.")
-        self._three_column_table(self.dragonfly.square_year_cloudy, "cloudy")
+    def write_square_year_clouds(self):
+        self.ws.cell(1, self.wu.current_column, "Cloudiness dynamics throw years")
+        self._three_column_table(self.dragonfly.square_year_clouds, "clouds")
         self._add_spacing_column()
 
-    # вода
+    # Water
     def write_year_water_types(self):
-        self.ws.cell(1, self.wu.current_column, "Преобладающее состояние воды")
-        self.ws.cell(2, self.wu.current_column, "Год")
+        self.ws.cell(1, self.wu.current_column, "Predominant water conditions")
+        self.ws.cell(2, self.wu.current_column, "Year")
         self.ws.cell(2, self.wu.current_column + 1, "Tekoss")
         self.ws.cell(2, self.wu.current_column + 2, "Stavoss")
         self._three_column_table_special(self.dragonfly.year_water_types, "Tekoss", "Stavoss")
         self._add_spacing_column()
 
     def write_square_year_water(self):
-        self.ws.cell(1, self.wu.current_column, "Состояния воды")
+        self.ws.cell(1, self.wu.current_column, "Water conditions dynamics")
         self._three_column_table(self.dragonfly.square_year_water, "water")
         self._add_spacing_column()
 
-    # затенение
+    # Shading 
     def write_year_shading_types(self):
-        self.ws.cell(1, self.wu.current_column, "Преобладающие состояния затенения")
-        self.ws.cell(2, self.wu.current_column, "Год")
+        self.ws.cell(1, self.wu.current_column, "Predominant shading conditions")
+        self.ws.cell(2, self.wu.current_column, "Year")
         self.ws.cell(2, self.wu.current_column + 1, "Dalejs")
         self.ws.cell(2, self.wu.current_column + 2, "Nav")
         self._three_column_table_special(self.dragonfly.year_shading_types, "Dalejs", "Nav")
         self._add_spacing_column()
 
     def write_square_year_shading(self):
-        self.ws.cell(1, self.wu.current_column, "Состояния тени")
+        self.ws.cell(1, self.wu.current_column, "Shading conditions dynamics")
         self._three_column_table(self.dragonfly.square_year_shading, "shading")
         self._add_spacing_column()
-
-    def save(self):
-        self.wu.wb.save(self.result_file)
-
+    
+    # Protected methods 
     def _add_spacing_column(self):
         self.ws.cell(1, self.wu.call_column(), "")
 
@@ -150,33 +147,3 @@ class DragonflyWriter:
                 self.ws.cell(index + 3, column3, data[gen_key][in_key2])
             except KeyError:
                 self.ws.cell(index + 3, column3, 0)
-
-# def _write_to_cell(self, row, column, value):
-#     self.ws.cell(row, column, value)
-#     self._connect_columns(column, value)
-#     self._black_borders(self.ws.cell(row, column))
-#
-
-#
-# def _connect_columns(self, column, value):
-#     start_column = get_column_letter(column)
-#     span = int(round(len(str(value)) / 10, 0))
-#     end_column_index = column + span
-#     end_column = get_column_letter(end_column_index)
-#
-#     self.ws.merge_cells(f"{start_column}1:{end_column}1")
-#
-#     for col in range(column, end_column_index + 1):
-#         cell = self.ws.cell(row=1, column=col)
-#         self._black_borders(cell)
-#     self.current_column += span
-#
-#
-# def _black_borders(self, cell):
-#     black_borders = Border(
-#         left=Side(style='thin', color='000000'),
-#         right=Side(style='thin', color='000000'),
-#         top=Side(style='thin', color='000000'),
-#         bottom=Side(style='thin', color='000000')
-#     )
-#     cell.border = black_borders

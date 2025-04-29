@@ -13,39 +13,41 @@ class XlsxFileEmployee:
     def __init__(self, error_collector):
         self.error_collector = error_collector
         self.files = []
-        self.dragonfly_writer = None
+        self.workbook_utility = None
 
-    def write_to_excel(self, dragonfly_object, result_file):
-        self.dragonfly_writer = DragonflyWriter(dragonfly_object, result_file)
-        # кол-во
-        self.dragonfly_writer.write_total_count()
-        self.dragonfly_writer.write_count_by_year()
-        self.dragonfly_writer.write_count_by_square()
-        self.dragonfly_writer.write_square_year_count()
+    def set_workbook_utility(self, workbook_utility):
+        self.workbook_utility = workbook_utility
 
-        # температура
-        self.dragonfly_writer.write_avg_temp_by_year()
-        self.dragonfly_writer.write_avg_temp_by_square()
-        self.dragonfly_writer.write_square_year_temp()
+    def write_to_excel(self, dragonfly_object):
+        writer = DragonflyWriter(dragonfly_object, self.workbook_utility)
+        # Count (quantity) 
+        writer.write_total_count()
+        writer.write_count_by_year()
+        writer.write_count_by_square()
+        writer.write_square_year_count()
 
-        # ветер
-        self.dragonfly_writer.write_avg_wind_by_year()
-        self.dragonfly_writer.write_avg_wind_by_square()
-        self.dragonfly_writer.write_square_year_wind()
+        # Temperature 
+        writer.write_avg_temp_by_year()
+        writer.write_avg_temp_by_square()
+        writer.write_square_year_temp()
 
-        # облачность
-        self.dragonfly_writer.write_avg_cloudy_by_year()
-        self.dragonfly_writer.write_avg_cloudy_by_square()
-        self.dragonfly_writer.write_square_year_cloudy()
+        # Clouds 
+        writer.write_avg_clouds_by_year()
+        writer.write_avg_clouds_by_square()
+        writer.write_square_year_clouds()
 
-        # вода
-        self.dragonfly_writer.write_year_water_types()
-        self.dragonfly_writer.write_square_year_water()
+        # Wind
+        writer.write_avg_wind_by_year()
+        writer.write_avg_wind_by_square()
+        writer.write_square_year_wind()
+        
+        # Water
+        writer.write_year_water_types()
+        writer.write_square_year_water()
 
-        # затенение
-        self.dragonfly_writer.write_year_shading_types()
-        self.dragonfly_writer.write_square_year_shading()
-        self.dragonfly_writer.save()
+        # Shading
+        writer.write_year_shading_types()
+        writer.write_square_year_shading()
 
     def load_files(self, map_name, sort=False):
         try:
