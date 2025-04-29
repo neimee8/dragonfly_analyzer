@@ -1,5 +1,3 @@
-from workbook_utility import WorkbookUtility
-
 class DragonflyWriter:
     def __init__(self, dragonfly, workbook_utility):
         self.dragonfly = dragonfly
