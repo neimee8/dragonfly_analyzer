@@ -48,11 +48,10 @@ class XlsxFileEmployee:
         writer.write_year_shading_types()
         writer.write_square_year_shading()
 
-    # name changed - from load_files
+    # changed by neimee8: loads files one by one
     def load_file(self, file):
-        # cycle is in backend task, sorting by command
         self.files.append(Path(file))
 
-    # name changed - public form, sorts files in object
+    # changed by neimee8: sorts files in class
     def sort_files(self):
         self.files =  sorted(self.files, key=lambda file: int(re.match(r"\d+", file.name).group()))
