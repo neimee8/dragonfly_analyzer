@@ -1,0 +1,8 @@
+{
+    "Tooltip.TLabel": {
+        "background": "#efefef",
+        "relief": "solid",
+        "borderwidth": 1,
+        "padding": 2
+    }
+}

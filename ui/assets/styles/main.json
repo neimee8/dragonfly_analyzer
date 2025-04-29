@@ -1,0 +1,17 @@
+{
+    "Header.TLabel": {
+        "font": "Tahoma 16 bold"
+    },
+    "ValidFileSelectionState.TLabel": {
+        "foreground": "green"
+    },
+    "InvalidFileSelectionState.TLabel": {
+        "foreground": "red"
+    },
+    "HoverFileSelectionState.TLabel": {
+        "foreground": "orange"
+    },
+    "Execute.TButton": {
+        "padding": 15
+    }
+}
