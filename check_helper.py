@@ -51,4 +51,3 @@ class CheckHelper:
                 self.xlsx_validator.is_data(value, log=log_type, addition_info=self.error_template(value_name, row_index)) and
                 self.xlsx_validator.is_numeric(value, log=log_type, addition_info=self.error_template(value_name, row_index))
         )
-
