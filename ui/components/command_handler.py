@@ -185,7 +185,7 @@ class UICommandHandler:
         result_file: str,
         operation_weights: Dict
     ):
-        # put whole method into try to avoid a crash caused by unexpected unhandled exceptions
+        # put whole method into try catch to avoid a crash caused by unexpected unhandled exceptions
         try:    
             # print separator
             queue.put({
