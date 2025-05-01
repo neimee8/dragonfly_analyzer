@@ -22,7 +22,7 @@ class DragonflyWriter:
         self._add_spacing_column()
 
     def write_square_year_count(self):
-        self.ws.cell(1, self.wu.current_column, "Quantity dynamics throw years")
+        self.ws.cell(1, self.wu.current_column, "Quantity dynamics through years")
         self._three_column_table(self.dragonfly.square_year_count, "count")
         self._add_spacing_column()
 
@@ -38,7 +38,7 @@ class DragonflyWriter:
         self._add_spacing_column()
 
     def write_square_year_temp(self):
-        self.ws.cell(1, self.wu.current_column, "Temp. dynamics throw years")
+        self.ws.cell(1, self.wu.current_column, "Temp. dynamics through years")
         self._three_column_table(self.dragonfly.square_year_temp, "temperature")
         self._add_spacing_column()
 
@@ -54,7 +54,7 @@ class DragonflyWriter:
         self._add_spacing_column()
 
     def write_square_year_wind(self):
-        self.ws.cell(1, self.wu.current_column, "Wind dynamics throw years")
+        self.ws.cell(1, self.wu.current_column, "Wind dynamics through years")
         self._three_column_table(self.dragonfly.square_year_wind, "wind")
         self._add_spacing_column()
 
@@ -70,7 +70,7 @@ class DragonflyWriter:
         self._add_spacing_column()
 
     def write_square_year_clouds(self):
-        self.ws.cell(1, self.wu.current_column, "Cloudiness dynamics throw years")
+        self.ws.cell(1, self.wu.current_column, "Cloudiness dynamics through years")
         self._three_column_table(self.dragonfly.square_year_clouds, "clouds")
         self._add_spacing_column()
 
