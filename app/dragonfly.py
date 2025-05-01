@@ -38,7 +38,8 @@ class Dragonfly:
 
     def add_avg_source(self, dict_name, key, value):
         specific_dict = self._init_data_structure(dict_name, dict)
-        value = 0 if (not self.xlsx_validator.is_data(value, log=False) and not self.xlsx_validator.is_numeric(value, log=False)) else value
+        if (not self.xlsx_validator.is_data(value, log=False) or not self.xlsx_validator.is_numeric(value, log=False)):
+            return
 
         if key not in specific_dict:
             specific_dict[key] = [0, 0]
