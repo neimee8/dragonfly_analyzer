@@ -36,7 +36,7 @@ class Config:
         self.input_filetypes = (('Excel files', '*.xlsx'), ('All files', '*.*'))
         self.input_excel_sheet_name = 'Datu tabula'
         self.input_excel_correct_columns = ['Gads', 'Kvadrats', 'Temperatura', 'Makonainiba', 'Vejs', 'udens', 'Noenojums']
-        self.console_separator = '-----------------------------------'
+        self.console_separator = '-' * 40
         self.progressbar_finish_time = 0.5
         self.operation_weights = {
             'file_validation': 22,
