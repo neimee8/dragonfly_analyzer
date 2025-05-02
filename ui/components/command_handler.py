@@ -31,7 +31,6 @@ class UICommandHandler:
         'error': False,
         'report': True
     }
-    console_log = []
 
     # updates file selection state label file count
     @classmethod
@@ -125,12 +124,7 @@ class UICommandHandler:
     # prints message to logger
     @classmethod
     def cout(cls, window: tk.Tk, console_widget: tk.Text, type: str, msg: str):
-        msg = '\n' + msg + '\n'
-
-        cls.console_log.append({
-            'type': type,
-            'msg': msg
-        })
+        msg = f'\n{msg}\n'
 
         condition = cls.check['error'] and type == 'file_validation_error'
         condition = condition or (cls.check['report'] and type == 'report')
