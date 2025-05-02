@@ -312,8 +312,6 @@ class UICommandHandler:
                     'data': progress
                 })
 
-                time.sleep(cnf.error_print_delay)
-
             if len(main_error_collector.errors) > 0 and check['error']:
                 queue.put({
                     'key': 'console',
