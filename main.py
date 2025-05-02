@@ -325,7 +325,7 @@ if __name__ == '__main__':
         name = 'execute_button'
     )
 
-    # saving elemnts that need to be toggled when backend starts execution
+    # saving elemnts that need to be disabled/enabled depending on backend task execution
     elements_to_toggle = {
         'file_selection_button': main_widgets['file_selection_button'],
         'error_checkbox': console_widgets['error_checkbox'],
