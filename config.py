@@ -32,7 +32,7 @@ class Config:
         self.default_start_msg = '\nHello!!!'
         self.ui_update_interval = 25
         self.logger_padding = 15
-        self.error_print_delay = self.ui_update_interval / 1000 / 2
+        self.error_print_delay = 0
         self.input_filetypes = (('Excel files', '*.xlsx'), ('All files', '*.*'))
         self.input_excel_sheet_name = 'Datu tabula'
         self.input_excel_correct_columns = ['Gads', 'Kvadrats', 'Temperatura', 'Makonainiba', 'Vejs', 'udens', 'Noenojums']
