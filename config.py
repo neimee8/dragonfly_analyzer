@@ -46,6 +46,6 @@ class Config:
             'file_assembly': 4
         }
 
-        for key, value in _CONSTS.items():
-            setattr(self, key, value)
+        for name, value in _CONSTS.items():
+            setattr(self, name, value)
             
