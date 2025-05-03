@@ -17,26 +17,26 @@ class JsonWriter(FileWriter):
 
         data['temperature'] = {}
         data['temperature']['avg_temp_by_year'] = self.dragonfly.avg_temp_by_year.to_dict()
-        data['temperature']['square_year_temp'] = self.dragonfly.square_year_temp
+        data['temperature']['square_year_temp'] = self.dragonfly.square_year_temp.to_dict()
         data['temperature']['avg_temp_by_square'] = self.dragonfly.avg_temp_by_square.to_dict()
 
         data['wind'] = {}
         data['wind']['avg_wind_by_year'] = self.dragonfly.avg_wind_by_year.to_dict()
-        data['wind']['square_year_wind'] = self.dragonfly.square_year_wind
+        data['wind']['square_year_wind'] = self.dragonfly.square_year_wind.to_dict()
         data['wind']['avg_wind_by_square'] = self.dragonfly.avg_wind_by_square.to_dict()
 
         data['cloudiness'] = {}
         data['cloudiness']['avg_cloudiness_by_year'] = self.dragonfly.avg_clouds_by_year.to_dict()
-        data['cloudiness']['square_year_cloudiness'] = self.dragonfly.square_year_clouds
+        data['cloudiness']['square_year_cloudiness'] = self.dragonfly.square_year_clouds.to_dict()
         data['cloudiness']['avg_cloudiness_by_square'] = self.dragonfly.avg_clouds_by_square.to_dict()
 
         data['water'] = {}
         data['water']['year_water_types'] = self.dragonfly.year_water_types.to_dict()
-        data['water']['square_year_water'] = self.dragonfly.square_year_water
+        data['water']['square_year_water'] = self.dragonfly.square_year_water.to_dict()
 
         data['shading'] = {}
         data['shading']['year_shading_types'] = self.dragonfly.year_shading_types.to_dict()
-        data['shading']['square_year_shading'] = self.dragonfly.square_year_shading
+        data['shading']['square_year_shading'] = self.dragonfly.square_year_shading.to_dict()
 
         return data
     
