@@ -33,7 +33,7 @@ if __name__ == '__main__':
     )
 
     root.geometry(f'{cnf.window_size[0]}x{cnf.window_size[1]}+{window_shift[0]}+{window_shift[1]}')
-    # root.resizable(False, False)
+    root.minsize(cnf.window_size[0], cnf.window_size[1])
 
     # initializing tkinter variables
     error_checkbox_var = tk.BooleanVar()
