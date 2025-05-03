@@ -18,7 +18,6 @@ from tkinter import ttk
 from tkinter import filedialog
 import multiprocessing
 import os
-import queue
 import time
 from pathlib import Path
 from typing import Dict, Union, Tuple, Callable
