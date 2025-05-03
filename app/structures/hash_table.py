@@ -1,6 +1,8 @@
 from app.structures.node import Node
 
-class HashTable:
+from collections.abc import Mapping     # for **kwargs
+
+class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots
     def __init__(self, capacity=128, **kwargs):
         self.capacity = capacity
@@ -106,3 +108,10 @@ class HashTable:
     def __iter__(self):
         for key in self.insertion_order:
             yield key
+
+    def __contains__(self, key):
+        try:
+            self[key]
+            return True
+        except KeyError:
+            return False
