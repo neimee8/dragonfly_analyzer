@@ -461,6 +461,7 @@ class UICommandHandler:
                     }
                 })
 
+            # preparing result file size for printing in logger widget
             size = os.path.getsize(result_file)
             units = ['B', 'KB', 'MB']
             units_index = 0
@@ -484,7 +485,7 @@ class UICommandHandler:
                 }
             })
 
-            # Triggers the termination of the periodic UI update method
+            # triggers the termination of the periodic UI update method
             queue.put('END')
 
         # behavior in case of an unexpected error

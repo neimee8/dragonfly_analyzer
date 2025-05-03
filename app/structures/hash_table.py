@@ -117,7 +117,7 @@ class HashTable(Mapping):
         except KeyError:
             return False
 
-    # Convert to a regular dictionary
+    # Convert to a regular dictionary (recursive for deep convert)
     def to_dict(self):
         result = {}
 
