@@ -480,7 +480,7 @@ class UICommandHandler:
             queue.put('END')
 
         # behavior in case of an unexpected error
-        except Exception:
+        except:
             queue.put({
                 'key': 'console',
                 'data': {
