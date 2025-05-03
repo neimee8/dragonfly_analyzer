@@ -31,21 +31,11 @@ class JsonWriter(FileWriter):
         data['cloudiness']['avg_cloudiness_by_square'] = self.dragonfly.avg_clouds_by_square.to_dict()
 
         data['water'] = {}
-        year_water_types = {}
-
-        for key, value in self.dragonfly.year_water_types.items():
-            year_water_types[key] = value.to_dict()
-        
-        data['water']['year_water_types'] = year_water_types
+        data['water']['year_water_types'] = self.dragonfly.year_water_types.to_dict()
         data['water']['square_year_water'] = self.dragonfly.square_year_water
 
         data['shading'] = {}
-        year_shading_types = {}
-
-        for key, value in self.dragonfly.year_shading_types.items():
-            year_water_types[key] = value.to_dict()
-
-        data['shading']['year_shading_types'] = year_shading_types
+        data['shading']['year_shading_types'] = self.dragonfly.year_shading_types.to_dict()
         data['shading']['square_year_shading'] = self.dragonfly.square_year_shading
 
         return data
