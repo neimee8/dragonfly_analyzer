@@ -15,7 +15,7 @@ class EmptyProcessSafeQueueError(Exception):
     def __repr__(self):
         return self.message
 
-# Process-Safe Queue
+# Process-Safe Queue (use of linked list structure is impossible due to queue usage in multiprocessing)
 class ProcessSafeQueue:
     # initialization with shared memory data
     def __init__(self, shared_list, shared_head, shared_tail, shared_lock):
