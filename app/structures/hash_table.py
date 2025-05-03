@@ -109,9 +109,19 @@ class HashTable(Mapping):
         for key in self.insertion_order:
             yield key
 
+    # Check if HashTable contains a key
     def __contains__(self, key):
         try:
             self[key]
             return True
         except KeyError:
             return False
+
+    # Convert to a regular dictionary
+    def to_dict(self):
+        dict = {}
+
+        for key in self.insertion_order:
+            dict[key] = self[key]
+
+        return dict
