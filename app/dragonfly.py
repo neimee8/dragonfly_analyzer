@@ -30,7 +30,7 @@ class Dragonfly:
         specific_dict = self._init_data_structure(dict_name, dict)
 
         if general_key not in specific_dict:
-            specific_dict[general_key] = {}
+            specific_dict[general_key] = HashTable()
 
         if inner_key not in specific_dict[general_key]:
             specific_dict[general_key][inner_key] = 1
