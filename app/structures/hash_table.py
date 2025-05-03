@@ -2,11 +2,14 @@ from app.structures.node import Node
 
 class HashTable:
     # Creates a new HashTable with a capacity of 128 slots
-    def __init__(self, capacity=128):
+    def __init__(self, capacity=128, **kwargs):
         self.capacity = capacity
         self.size = 0
         self.table = [None] * capacity
         self.insertion_order = []
+
+        for key, value in kwargs.items():
+            self[key] = value
 
     # Method for iterating over keys
     def keys(self):
@@ -103,4 +106,4 @@ class HashTable:
     def __iter__(self):
         for key in self.insertion_order:
             yield key
-                
+            
