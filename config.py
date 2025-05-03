@@ -52,7 +52,7 @@ class Config:
         self.progressbar_finish_time = 0.5
         self.operation_weights = HashTable(
             file_validation = 22,
-            file_laoding = 2,
+            file_loading = 2,
             file_analyzing = 63,
             error_output = 1,
             file_assembly = 4

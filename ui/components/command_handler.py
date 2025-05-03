@@ -724,7 +724,7 @@ class UICommandHandler:
                 cls.check,
                 min_mode,
                 result_file,
-                operation_weights
+                operation_weights.to_dict()
             )
         )
         task_process.start()
