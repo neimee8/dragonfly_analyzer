@@ -4,4 +4,3 @@ class ErrorCollector:
 
     def add(self, error, type):
         self.errors.append(f"{error} type={type}")
-        

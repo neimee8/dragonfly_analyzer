@@ -55,4 +55,3 @@ class XlsxFileEmployee:
     # changed by neimee8: sorts files in class
     def sort_files(self):
         self.files =  sorted(self.files, key=lambda file: int(re.match(r"\d+", file.name).group()))
- 

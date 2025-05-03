@@ -48,4 +48,3 @@ class JsonWriter(FileWriter):
                 json.dump(data, file, separators = (',', ':'))
             else:
                 json.dump(data, file, indent = 4, ensure_ascii = False)
-

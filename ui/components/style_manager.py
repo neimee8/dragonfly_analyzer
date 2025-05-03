@@ -23,4 +23,3 @@ class StyleManager:
             style.configure(name, **params)
 
         return style    
- 

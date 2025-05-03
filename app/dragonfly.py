@@ -62,4 +62,3 @@ class Dragonfly:
 
     def _find_avg(self, value, value_count):
         return round(float(value) / value_count, 2)
-    

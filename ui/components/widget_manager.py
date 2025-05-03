@@ -38,4 +38,3 @@ class WidgetManager:
     # standart getter
     def __getitem__(self, name: str):
         return self._widgets[name]
-            
