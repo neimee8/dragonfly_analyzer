@@ -103,4 +103,3 @@ class HashTable:
     def __iter__(self):
         for key in self.insertion_order:
             yield key
-                
