@@ -5,6 +5,7 @@ warnings.simplefilter("ignore", UserWarning)
 from app.xlsx_data_validator import XlsxDataValidator
 from app.dragonfly import Dragonfly
 from app.check_helper import CheckHelper
+from app.structures.hash_table import HashTable
 
 class DragonflyAnalyzer:
     def __init__(self, error_collector):
@@ -12,7 +13,7 @@ class DragonflyAnalyzer:
         self.xlsx_validator = XlsxDataValidator(error_collector)
         self.check_helper = CheckHelper(error_collector)
 
-        self.analyzed_dragonflies = {}
+        self.analyzed_dragonflies = HashTable()
         self.xlsx_file = None
         self.current_dragonfly = None
         self.xlsx_file_name = None
@@ -109,4 +110,3 @@ class DragonflyAnalyzer:
         current_dragonfly.add_dict_with_inner_key("year_shading_types", row[year], row[shading])
         # Shading condition at a specific square across all years
         current_dragonfly.add_list_with_dict("square_year_shading", square=row[square], year=row[year], shading=row[shading])
-        
