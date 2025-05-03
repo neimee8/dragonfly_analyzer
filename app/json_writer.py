@@ -43,7 +43,6 @@ class JsonWriter(FileWriter):
     # saves given dictionary to JSON file
     @staticmethod
     def save(data: Dict[str, Any], output_filename: str, min: bool = False):
-        print(data)
         with open(output_filename, 'w', encoding = 'utf-8') as file:
             if min:
                 json.dump(data, file, separators = (',', ':'))
