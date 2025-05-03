@@ -355,4 +355,3 @@ if __name__ == '__main__':
     # packing main widgets into window and starting main loop
     main_widgets.pack()
     root.mainloop()
- 

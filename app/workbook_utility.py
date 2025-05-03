@@ -30,4 +30,3 @@ class WorkbookUtility:
 
     def save(self):
         self.wb.save(self.result_file)
-        

@@ -10,6 +10,8 @@ from app.error_collector import ErrorCollector
 from app.json_writer import JsonWriter
 from app.xml_writer import XmlWriter
 
+from app.structures.process_safe_queue import ProcessSafeQueue, EmptyProcessSafeQueueError
+
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
@@ -171,7 +173,7 @@ class UICommandHandler:
     @classmethod
     def parallel_backend_task(
         cls,
-        queue: multiprocessing.Queue,
+        queue,
         selected_files: Tuple[str],
         output_filetype: str,
         check: Dict[str, bool],
@@ -180,8 +182,7 @@ class UICommandHandler:
         operation_weights: Dict
     ):
         # put whole method into try catch to avoid a crash caused by unexpected unhandled exceptions
-        try:    
-            # print separator
+        try:
             queue.put({
                 'key': 'console',
                 'data': {
@@ -481,7 +482,7 @@ class UICommandHandler:
             queue.put('END')
 
         # behavior in case of an unexpected error
-        except Exception as e:
+        except Exception:
             queue.put({
                 'key': 'console',
                 'data': {
@@ -502,7 +503,7 @@ class UICommandHandler:
             })
             queue.put('END')
             
-    # periodec UI updating by listening the queue
+    # periodic UI updating by listening the queue
     @classmethod
     def periodic_update_ui(
         cls,
@@ -536,7 +537,7 @@ class UICommandHandler:
                             cls.cout(window, console_widget, data['data']['type'], data['data']['msg'])
                 else:
                     break
-        except queue.Empty:
+        except EmptyProcessSafeQueueError:
             pass
 
         window.update()
@@ -705,7 +706,13 @@ class UICommandHandler:
             cls.update_file_selection_state_label_file_count(window, state_label)
             cls.update_file_selection_state_label_style(window, state_label)
 
-        queue = multiprocessing.Queue()
+        manager = multiprocessing.Manager()
+        shared_list = manager.list()
+        shared_head = manager.Value('i', -1)
+        shared_tail = manager.Value('i', -1)
+        shared_lock = multiprocessing.Lock()
+
+        queue = ProcessSafeQueue(shared_list, shared_head, shared_tail, shared_lock)
 
         # runs the task in a separate process to avoid blocking the UI thread while task executing
         task_process = multiprocessing.Process(
@@ -724,4 +731,3 @@ class UICommandHandler:
 
         # periodically cheсking the queue to apply UI updates
         cls.periodic_update_ui(window, console_widget, progressbar, queue, finalize)
-        

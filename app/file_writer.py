@@ -13,4 +13,3 @@ class FileWriter:
     @staticmethod
     def save(data, output_filename: str, min: bool):
         raise NotImplementedError()
-    

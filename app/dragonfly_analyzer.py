@@ -109,4 +109,3 @@ class DragonflyAnalyzer:
         current_dragonfly.add_dict_with_inner_key("year_shading_types", row[year], row[shading])
         # Shading condition at a specific square across all years
         current_dragonfly.add_list_with_dict("square_year_shading", square=row[square], year=row[year], shading=row[shading])
-        
