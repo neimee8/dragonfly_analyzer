@@ -1,11 +1,13 @@
 """Stores all useful constants"""
 
+from app.structures.hash_table import HashTable
+
 import os
 import PIL
 import PIL.Image
 
 # saves needed paths
-_CONSTS = {}
+_CONSTS = HashTable()
 _CONSTS['ASSETS_DIR'] = 'ui/assets/'
 _CONSTS['IMG_DIR'] = f'{_CONSTS["ASSETS_DIR"]}img/'
 _CONSTS['STYLES_DIR'] = f'{_CONSTS["ASSETS_DIR"]}styles/'
@@ -32,18 +34,29 @@ class Config:
         self.default_start_msg = '\nHello!!!'
         self.ui_update_interval = 25
         self.logger_padding = 15
-        self.input_filetypes = (('Excel files', '*.xlsx'), ('All files', '*.*'))
+        self.input_filetypes = (
+            ('Excel files', '*.xlsx'),
+            ('All files', '*.*')
+        )
         self.input_excel_sheet_name = 'Datu tabula'
-        self.input_excel_correct_columns = ['Gads', 'Kvadrats', 'Temperatura', 'Makonainiba', 'Vejs', 'udens', 'Noenojums']
+        self.input_excel_correct_columns = [
+            'Gads',
+            'Kvadrats',
+            'Temperatura',
+            'Makonainiba',
+            'Vejs',
+            'udens',
+            'Noenojums'
+        ]
         self.console_separator = '-' * 40
         self.progressbar_finish_time = 0.5
-        self.operation_weights = {
-            'file_validation': 22,
-            'file_loading': 2,
-            'file_analyzing': 63,
-            'error_output': 1,
-            'file_assembly': 4
-        }
+        self.operation_weights = HashTable(
+            file_validation = 22,
+            file_loading = 2,
+            file_analyzing = 63,
+            error_output = 1,
+            file_assembly = 4
+        )
 
         for name, value in _CONSTS.items():
             setattr(self, name, value)

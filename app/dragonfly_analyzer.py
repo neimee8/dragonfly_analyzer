@@ -1,11 +1,12 @@
 import pandas as pd
 import warnings
-warnings.simplefilter("ignore", UserWarning)
 
 from app.xlsx_data_validator import XlsxDataValidator
 from app.dragonfly import Dragonfly
 from app.check_helper import CheckHelper
 from app.structures.hash_table import HashTable
+
+warnings.simplefilter("ignore", UserWarning)
 
 class DragonflyAnalyzer:
     def __init__(self, error_collector):

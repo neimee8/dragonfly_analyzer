@@ -11,13 +11,13 @@ from app.json_writer import JsonWriter
 from app.xml_writer import XmlWriter
 
 from app.structures.process_safe_queue import ProcessSafeQueue, EmptyProcessSafeQueueError
+from app.structures.hash_table import HashTable
 
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 import multiprocessing
 import os
-import queue
 import time
 from pathlib import Path
 from typing import Dict, Union, Tuple, Callable
@@ -29,10 +29,10 @@ cnf = Config()
 
 class UICommandHandler:
     selected_files = ()
-    check = {
-        'error': False,
-        'report': True
-    }
+    check = HashTable(
+        error = False,
+        report = True
+    )
 
     # updates file selection state label file count
     @classmethod
@@ -62,14 +62,12 @@ class UICommandHandler:
     def select_files(cls, window: tk.Tk, state_label: ttk.Label, event = None):
         filenames = filedialog.askopenfilenames(title = 'Select files', filetypes = cnf.input_filetypes)
 
-        if filenames == '':
-            cls.selected_files = ()
-        else:
+        if len(filenames) > 0:
             cls.selected_files = filenames
 
-        # updating file selection state label
-        cls.update_file_selection_state_label_file_count(window, state_label)
-        cls.update_file_selection_state_label_style(window, state_label)
+            # updating file selection state label
+            cls.update_file_selection_state_label_file_count(window, state_label)
+            cls.update_file_selection_state_label_style(window, state_label)
 
     # hover effect for file selection state label
     @classmethod
@@ -179,7 +177,7 @@ class UICommandHandler:
         check: Dict[str, bool],
         min_mode: bool,
         result_file: str,
-        operation_weights: Dict
+        operation_weights: Dict[str, int]
     ):
         # put whole method into try catch to avoid a crash caused by unexpected unhandled exceptions
         try:
@@ -482,7 +480,7 @@ class UICommandHandler:
             queue.put('END')
 
         # behavior in case of an unexpected error
-        except Exception:
+        except:
             queue.put({
                 'key': 'console',
                 'data': {
@@ -558,7 +556,7 @@ class UICommandHandler:
         progressbar: ttk.Progressbar,
         state_label: ttk.Label,
         output_filetype: str,
-        elements_to_toggle: Dict[str, Union[tk.Widget, ttk.Widget]],
+        elements_to_toggle: HashTable,
         min_mode: bool,
         event
     ):
@@ -721,10 +719,10 @@ class UICommandHandler:
                 queue,
                 cls.selected_files,
                 output_filetype,
-                cls.check,
+                cls.check.to_dict(),
                 min_mode,
                 result_file,
-                operation_weights
+                operation_weights.to_dict()
             )
         )
         task_process.start()

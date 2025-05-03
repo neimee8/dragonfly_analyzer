@@ -6,6 +6,8 @@ from ui.components.command_handler import UICommandHandler
 from ui.components.widget_manager import WidgetManager
 from ui.components.style_manager import StyleManager
 
+from app.structures.hash_table import HashTable
+
 import tkinter as tk
 from tkinter import ttk
 import PIL
@@ -33,7 +35,7 @@ if __name__ == '__main__':
     )
 
     root.geometry(f'{cnf.window_size[0]}x{cnf.window_size[1]}+{window_shift[0]}+{window_shift[1]}')
-    # root.resizable(False, False)
+    root.minsize(cnf.window_size[0], cnf.window_size[1])
 
     # initializing tkinter variables
     error_checkbox_var = tk.BooleanVar()
@@ -47,7 +49,7 @@ if __name__ == '__main__':
     min_mode_var.set(0)
 
     # dictionary with tkinter registered variable names
-    checkbox_identifier = {}
+    checkbox_identifier = HashTable()
     checkbox_identifier[error_checkbox_var._name] = 'error'
     checkbox_identifier[report_checkbox_var._name] = 'report'
 
@@ -59,13 +61,13 @@ if __name__ == '__main__':
     dragonfly_img = dragonfly_img.resize(tuple(map(lambda size: size // 10, cnf.img.dragonfly.size)))
     dragonfly_img = PIL.ImageTk.PhotoImage(dragonfly_img)
 
-    main_widgets.add(ttk.Label(root, image = dragonfly_img), params = {'pady': (40, 5)})
+    main_widgets.add(ttk.Label(root, image = dragonfly_img), params = HashTable(pady = (40, 5)))
 
     main_widgets.add(ttk.Label(root, text = 'dragonfly analyzer', style = 'Header.TLabel'))
     main_widgets.add(
         ttk.Button(root, text = 'Select files'),
         name = 'file_selection_button',
-        params = {'pady': (50, 10)}
+        params = HashTable(pady = (50, 10))
     )
 
     main_widgets.add(
@@ -120,7 +122,7 @@ if __name__ == '__main__':
     main_widgets.add(
         ttk.Progressbar(root, orient = tk.HORIZONTAL, mode = 'determinate', length = 450),
         name = 'progressbar',
-        params = {'pady': (50, 30)}
+        params = HashTable(pady = (50, 30))
     )
 
     # adding a frame to pack checkboxes in one frame with tk.Text logger-widget
@@ -133,7 +135,7 @@ if __name__ == '__main__':
     console_widgets.add(
         ttk.Frame(main_widgets['console_frame']),
         name = 'text_frame',
-        params = {'pady': (0, 15)}
+        params = HashTable(pady = (0, 15))
     )
 
     # logger widget
@@ -209,7 +211,7 @@ if __name__ == '__main__':
             variable = error_checkbox_var
         ),
         name = 'error_checkbox',
-        params = {'anchor': tk.W}
+        params = HashTable(anchor = tk.W)
     )
     console_widgets.add(
         ttk.Checkbutton(
@@ -218,7 +220,7 @@ if __name__ == '__main__':
             variable = report_checkbox_var
         ),
         name = 'report_checkbox',
-        params = {'anchor': tk.W}
+        params = HashTable(anchor = tk.W)
     )
     console_widgets['report_checkbox'].configure(state = tk.DISABLED)
 
@@ -247,7 +249,7 @@ if __name__ == '__main__':
 
     main_widgets.add(
         ttk.Label(root, text = 'Choose output file type:'),
-        params = {'pady': (30, 15)}
+        params = HashTable(pady = (30, 15))
     )
     main_widgets.add(
         ttk.Radiobutton(
@@ -285,7 +287,7 @@ if __name__ == '__main__':
             variable = min_mode_var
         ),
         name = 'min_mode_checkbutton',
-        params = {'pady': (15, 50)}
+        params = HashTable(pady = (15, 50))
     )
     min_mode_checkbutton_tooltip = Tooltip(
         main_widgets['min_mode_checkbutton'],
@@ -326,16 +328,16 @@ if __name__ == '__main__':
     )
 
     # saving elemnts that need to be disabled/enabled depending on backend task execution
-    elements_to_toggle = {
-        'file_selection_button': main_widgets['file_selection_button'],
-        'error_checkbox': console_widgets['error_checkbox'],
-        'report_checkbox': console_widgets['report_checkbox'],
-        'radio_excel': main_widgets['radio_excel'],
-        'radio_json': main_widgets['radio_json'],
-        'radio_xml': main_widgets['radio_xml'],
-        'execute_button': main_widgets['execute_button'],
-        'min_mode_checkbutton': main_widgets['min_mode_checkbutton']
-    }
+    elements_to_toggle = HashTable(
+        file_selection_button = main_widgets['file_selection_button'],
+        error_checkbox = console_widgets['error_checkbox'],
+        report_checkbox = console_widgets['report_checkbox'],
+        radio_excel = main_widgets['radio_excel'],
+        radio_json = main_widgets['radio_json'],
+        radio_xml = main_widgets['radio_xml'],
+        execute_button = main_widgets['execute_button'],
+        min_mode_checkbutton = main_widgets['min_mode_checkbutton']
+    )
 
     # listens execute button click
     main_widgets['execute_button'].bind(
