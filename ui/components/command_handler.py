@@ -179,7 +179,7 @@ class UICommandHandler:
         check: Dict[str, bool],
         min_mode: bool,
         result_file: str,
-        operation_weights: Dict
+        operation_weights: Dict[str, int]
     ):
         # put whole method into try catch to avoid a crash caused by unexpected unhandled exceptions
         try:
