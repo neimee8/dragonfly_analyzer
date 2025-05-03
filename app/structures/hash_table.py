@@ -1,4 +1,4 @@
-from node import Node
+from app.structures.node import Node
 
 class HashTable:
     # Creates a new HashTable with a capacity of 128 slots
@@ -6,6 +6,7 @@ class HashTable:
         self.capacity = capacity
         self.size = 0
         self.table = [None] * capacity
+        self.insertion_order = []
 
     # Method for iterating over keys
     def keys(self):
@@ -13,19 +14,13 @@ class HashTable:
         
     # Method for iterating over values
     def values(self):
-        for node in self.table:
-            current = node
-            while current:
-                yield current.value
-                current = current.next  
+        for key in self.insertion_order:
+            yield self[key]
     
     # Method for iterating over (key, value) pairs
     def items(self):
-        for node in self.table:
-            current = node
-            while current:
-                yield (current.key, current.value)
-                current = current.next
+        for key in self.insertion_order:
+            yield (key, self[key])
 
     # Method for removing an element by key 
     def pop(self, key): 
@@ -40,6 +35,7 @@ class HashTable:
                 else: 
                     self.table[index] = current.next
                 self.size -= 1
+                self.insertion_order.remove(key)
                 return
             previous = current 
             current = current.next
@@ -80,12 +76,14 @@ class HashTable:
         # Resize if load factor exceeds 70%
         if (self.size + 1) > (self.capacity * 0.7):
             self._resize()
-            
+            index = self._hash(key)
+        
         new_node = Node(key, value)
         new_node.next = self.table[index]
         self.table[index] = new_node
         self.size += 1
-    
+        self.insertion_order.append(key)
+
     # Get the value associated with a key
     def __getitem__(self, key):
         index = self._hash(key)
@@ -97,22 +95,12 @@ class HashTable:
             current = current.next
         raise KeyError(key)
     
-    # Returns True if the key exists in the hash table (supports the 'in' operator)
-    def __contains__(self, key):
-        try:
-            self.__getitem__(key)
-            return True
-        except KeyError:
-            return False
-        
     # Returns the number of elements in the hash table (supports the len() function)
     def __len__(self):
         return self.size
     
     # Default iteration method (iterates over keys)
     def __iter__(self):
-        for node in self.table:
-            current = node 
-            while current:
-                yield current.key
-                current = current.next
+        for key in self.insertion_order:
+            yield key
+                
