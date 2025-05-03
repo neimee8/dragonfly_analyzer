@@ -47,4 +47,3 @@ class Config:
 
         for name, value in _CONSTS.items():
             setattr(self, name, value)
-            
