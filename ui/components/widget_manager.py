@@ -34,7 +34,13 @@ class WidgetManager:
     # pack each widget with specified parametres
     def pack(self):
         for key, widget in self._widgets.items():
-            params = self._params.get(key, {})
+            params = {}
+
+            try:
+                params = self._params[key]
+            except:
+                pass
+
             widget.pack(**params)
 
     # standart getter
