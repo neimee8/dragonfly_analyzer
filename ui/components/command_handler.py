@@ -62,14 +62,12 @@ class UICommandHandler:
     def select_files(cls, window: tk.Tk, state_label: ttk.Label, event = None):
         filenames = filedialog.askopenfilenames(title = 'Select files', filetypes = cnf.input_filetypes)
 
-        if filenames == '':
-            cls.selected_files = ()
-        else:
+        if len(filenames) > 0:
             cls.selected_files = filenames
 
-        # updating file selection state label
-        cls.update_file_selection_state_label_file_count(window, state_label)
-        cls.update_file_selection_state_label_style(window, state_label)
+            # updating file selection state label
+            cls.update_file_selection_state_label_file_count(window, state_label)
+            cls.update_file_selection_state_label_style(window, state_label)
 
     # hover effect for file selection state label
     @classmethod
