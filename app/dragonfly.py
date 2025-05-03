@@ -1,4 +1,5 @@
 from app.xlsx_data_validator import XlsxDataValidator
+from app.structures.hash_table import HashTable
 
 class Dragonfly:
     def __init__(self, error_collector, file_name, dragonfly_name="Unnamed"):
@@ -57,7 +58,7 @@ class Dragonfly:
 
     def _init_data_structure(self, name, typ):
         if not hasattr(self, name):
-            setattr(self, name, typ())
+            setattr(self, name, HashTable()) if typ == dict else setattr(self, name, typ())
         return getattr(self, name)
 
     def _find_avg(self, value, value_count):
