@@ -11,6 +11,7 @@ from app.json_writer import JsonWriter
 from app.xml_writer import XmlWriter
 
 from app.structures.process_safe_queue import ProcessSafeQueue, EmptyProcessSafeQueueError
+from app.structures.hash_table import HashTable
 
 import tkinter as tk
 from tkinter import ttk
@@ -29,10 +30,10 @@ cnf = Config()
 
 class UICommandHandler:
     selected_files = ()
-    check = {
-        'error': False,
-        'report': True
-    }
+    check = HashTable(
+        error = False,
+        report = True
+    )
 
     # updates file selection state label file count
     @classmethod
@@ -721,7 +722,7 @@ class UICommandHandler:
                 queue,
                 cls.selected_files,
                 output_filetype,
-                cls.check,
+                cls.check.to_dict(),
                 min_mode,
                 result_file,
                 operation_weights.to_dict()
