@@ -559,7 +559,7 @@ class UICommandHandler:
         progressbar: ttk.Progressbar,
         state_label: ttk.Label,
         output_filetype: str,
-        elements_to_toggle: Dict[str, Union[tk.Widget, ttk.Widget]],
+        elements_to_toggle: HashTable,
         min_mode: bool,
         event
     ):
