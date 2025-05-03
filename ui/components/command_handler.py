@@ -461,11 +461,19 @@ class UICommandHandler:
                     }
                 })
 
+            size = os.path.getsize(result_file)
+            units = ['B', 'KB', 'MB']
+            units_index = 0
+
+            while size >= 1024 and units_index < (len(units) - 1):
+                size /= 1024
+                units_index += 1
+
             queue.put({
                 'key': 'console',
                 'data': {
                     'type': 'msg',
-                    'msg': f'{Path(result_file).name} assembled successfully!'
+                    'msg': f'{Path(result_file).name} ({round(size, 2)} {units[units_index]}) assembled successfully!'
                 }
             })
             queue.put({
