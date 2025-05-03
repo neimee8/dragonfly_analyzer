@@ -2,7 +2,6 @@ from pathlib import Path
 from openpyxl.reader.excel import load_workbook
 from openpyxl.workbook import Workbook
 
-
 class WorkbookUtility:
     def __init__(self, result_file):
         self.result_file = result_file

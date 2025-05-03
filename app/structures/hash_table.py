@@ -1,6 +1,6 @@
 from app.structures.node import Node
 
-from collections.abc import Mapping     # for **kwargs
+from collections.abc import Mapping    # for **kwargs
 
 class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots
