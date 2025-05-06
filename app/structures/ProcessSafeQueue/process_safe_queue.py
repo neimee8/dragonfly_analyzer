@@ -27,12 +27,12 @@ class ProcessSafeQueue:
             self._list.append(Node(value))
 
     # gets from the head index of the queue
-    def get_nowait(self):
+    def get_nowait(self) -> any:
         with self._lock:
-            if self.is_empty():
-                raise EmptyProcessSafeQueueError()
-            
-            value = self._list[self._head.value].value
+            try:
+                value = self.peek()
+            except EmptyProcessSafeQueueError:
+                return None
 
             next_head_index = self._head.value + 1
             self._head.value = next_head_index if len(self._list) > next_head_index else -1
@@ -41,9 +41,16 @@ class ProcessSafeQueue:
                 self._tail.value = -1
 
             return value
+        
+    # shows first element without deleting
+    def peek(self):
+        if self.is_empty():
+            raise EmptyProcessSafeQueueError()
+
+        return self._list[self._head.value].value
                 
     # gets size of queue
-    def qsize(self):
+    def qsize(self) -> int:
         size = 0
         current_index = self._head.value
 
@@ -54,5 +61,9 @@ class ProcessSafeQueue:
         return size
     
     # check if empty
-    def is_empty(self):
+    def is_empty(self) -> bool:
         return self.qsize() == 0
+    
+    # behavior when used len()
+    def __len__(self) -> int:
+        return self.qsize()

@@ -1,6 +1,7 @@
 from app.structures.HashTable.node import Node
 
 from collections.abc import Mapping    # for **kwargs
+from typing import Dict, Union
 
 class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots
@@ -110,15 +111,16 @@ class HashTable(Mapping):
             yield key
 
     # Check if HashTable contains a key
-    def __contains__(self, key):
+    def __contains__(self, key: Union[str, int]) -> bool:
         try:
             self[key]
+
             return True
         except KeyError:
             return False
 
     # Convert to a regular dictionary (recursive for deep convert) 
-    def to_dict(self):
+    def to_dict(self) -> Dict[any, any]:
         result = {}
 
         for key, value in self.items():
