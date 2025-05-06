@@ -731,11 +731,13 @@ class UICommandHandler:
 
         # validation output filename
         if not result_file:
+            cls.csep(window, console_widget)
+
             cls.cout(
                 window,
                 console_widget,
                 'bold_error',
-                'Execution have stopped: you must select an output filename to continue!'
+                'Execution have stopped: you must select an output file name to continue!'
             )
 
             toggle_ui(tk.NORMAL)
