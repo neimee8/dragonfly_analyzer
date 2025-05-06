@@ -24,13 +24,13 @@ class Dragonfly:
 
     def add_list_with_dict(self, list_name, **attributes):
         specific_list = self._init_data_structure(list_name, list)
-        specific_list.append(attributes)
+        specific_list.append(HashTable(**attributes))
 
     def add_dict_with_inner_key(self, dict_name, general_key, inner_key):
         specific_dict = self._init_data_structure(dict_name, dict)
 
         if general_key not in specific_dict:
-            specific_dict[general_key] = {}
+            specific_dict[general_key] = HashTable()
 
         if inner_key not in specific_dict[general_key]:
             specific_dict[general_key][inner_key] = 1

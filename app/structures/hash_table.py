@@ -4,7 +4,7 @@ from collections.abc import Mapping    # for **kwargs
 
 class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots
-    def __init__(self, capacity=128, **kwargs):
+    def __init__(self, capacity=128, **kwargs): 
         self.capacity = capacity
         self.size = 0
         self.table = [None] * capacity
@@ -117,11 +117,49 @@ class HashTable(Mapping):
         except KeyError:
             return False
 
-    # Convert to a regular dictionary
+    # Convert to a regular dictionary (recursive for deep convert) 
     def to_dict(self):
-        dict = {}
+        result = {}
 
-        for key in self.insertion_order:
-            dict[key] = self[key]
+        for key, value in self.items():
 
-        return dict
+            if isinstance(value, HashTable):
+                result[key] = value.to_dict()
+
+            elif isinstance(value, dict):
+                temp_dict = {}
+
+                for sub_key, sub_value in value.items():
+                    if isinstance(sub_value, HashTable):
+                        temp_dict[sub_key] = sub_value.to_dict()
+                    else:
+                        temp_dict[sub_key] = sub_value
+
+                result[key] = temp_dict
+
+            elif isinstance(value, list):
+                temp_list = []
+
+                for item in value:
+                    if isinstance(item, HashTable):
+                        temp_list.append(item.to_dict())
+                    else:
+                        temp_list.append(item)
+
+                result[key] = temp_list
+
+            elif isinstance(value, tuple):
+                temp_tuple = []
+
+                for item in value:
+                    if isinstance(item, HashTable):
+                        temp_tuple.append(item.to_dict_recursive())
+                    else:
+                        temp_tuple.append(item)
+
+                result[key] = tuple(temp_tuple)
+
+            else:
+                result[key] = value
+
+        return result
