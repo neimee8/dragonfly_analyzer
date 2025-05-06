@@ -4,12 +4,12 @@ from app.file_writer import FileWriter
 
 from app.structures.HashTable.hash_table import HashTable
 
-from typing import Dict, Any
+from typing import Dict, Any, Self
 import json
 
 class JsonWriter(FileWriter):
     # prepares data in the dictionary form
-    def get_data(self) -> Dict[str, Any]:
+    def get_data(self: Self) -> Dict[str, Any]:
         data = {}
         square_year_data = HashTable()
 

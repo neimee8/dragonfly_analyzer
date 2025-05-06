@@ -4,10 +4,11 @@ from app.file_writer import FileWriter
 
 import xml.etree.ElementTree as et
 import xml.dom.minidom
+from typing import Self
 
 class XmlWriter(FileWriter):
     # prepares data in the tree form and returns a root
-    def get_data(self, dragonfly_name: str) -> et.Element:
+    def get_data(self: Self, dragonfly_name: str) -> et.Element:
         root = et.Element('Dragonfly')
         root.set('dragonfly', dragonfly_name)
 

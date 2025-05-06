@@ -4,16 +4,17 @@ from config import Config
 
 from tkinter import ttk
 import json
+from typing import Self
 
 cnf = Config()
 
 class StyleManager:
     # uploads the json style data
-    def __init__(self, name: str):
-        self.path = f'{cnf.STYLES_DIR + name}.json'
+    def __init__(self: Self, name: str) -> None:
+        self.path: str = f'{cnf.STYLES_DIR + name}.json'
 
     # returns ready-to-use style object
-    def get(self) -> ttk.Style:
+    def get(self: Self) -> ttk.Style:
         style = ttk.Style()
         
         with open(self.path, 'r', encoding = 'utf-8') as file:

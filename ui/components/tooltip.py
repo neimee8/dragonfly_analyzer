@@ -4,19 +4,24 @@ from ui.components.style_manager import StyleManager
 
 import tkinter as tk
 from tkinter import ttk
-from typing import Union
+from typing import Union, Self
 
 class Tooltip:
-    def __init__(self, widget: Union[tk.Widget, ttk.Widget], text, listen_mouse_enter: bool = True):
-        self.widget = widget
-        self.text = text
-        self.tooltip_container = None
+    def __init__(
+        self: Self,
+        widget: Union[tk.Widget, ttk.Widget],
+        text: str,
+        listen_mouse_enter: bool = True
+    ) -> None:
+        self.widget: Union[tk.Widget, ttk.Widget] = widget
+        self.text: str = text
+        self.tooltip_container: Union[None, tk.Toplevel] = None
 
         if listen_mouse_enter:
             self.widget.bind('<Enter>', self.show)
             self.widget.bind('<Leave>', self.hide)
 
-    def show(self, event):
+    def show(self: Self, event: tk.Event) -> None:
         # creates toplevel window without controls
         shift = (event.x_root + 20, event.y_root + 20)
         self.tooltip_container = tk.Toplevel(self.widget)
@@ -30,7 +35,7 @@ class Tooltip:
         tooltip_label = ttk.Label(self.tooltip_container, text = self.text, style = 'Tooltip.TLabel')
         tooltip_label.pack()
 
-    def hide(self, event):
+    def hide(self: Self, event: tk.Event) -> None:
         if self.tooltip_container:
             self.tooltip_container.destroy()
             self.tooltip_container = None

@@ -20,7 +20,7 @@ import multiprocessing
 import os
 import time
 from pathlib import Path
-from typing import Dict, Union, Tuple, Callable
+from typing import Dict, Union, Tuple, Callable, Type, Any
 import xml.etree.ElementTree as et
 
 import openpyxl
@@ -28,15 +28,19 @@ import openpyxl
 cnf = Config()
 
 class UICommandHandler:
-    selected_files = ()
-    check = HashTable(
+    selected_files: Tuple[str] = ()
+    check: HashTable = HashTable(
         error = False,
         report = True
     )
 
     # updates file selection state label file count
     @classmethod
-    def update_file_selection_state_label_file_count(cls, window: tk.Tk, state_label: ttk.Label):
+    def update_file_selection_state_label_file_count(
+        cls: Type['UICommandHandler'],
+        window: tk.Tk,
+        state_label: ttk.Label
+    ) -> None:
         text = f'{len(cls.selected_files)} file'
         text += 's' if len(cls.selected_files) != 1 else ''
         text += ' selected'
@@ -48,7 +52,11 @@ class UICommandHandler:
     
     # updates the style of file selection state label
     @classmethod
-    def update_file_selection_state_label_style(cls, window: tk.Tk, state_label: ttk.Label):
+    def update_file_selection_state_label_style(
+        cls: Type['UICommandHandler'],
+        window: tk.Tk,
+        state_label: ttk.Label
+    ) -> None:
         if len(cls.selected_files) == 0:
             state_label.configure(style = 'InvalidFileSelectionState.TLabel')
         else:
@@ -59,7 +67,12 @@ class UICommandHandler:
 
     # makes possible to select multiple input files
     @classmethod
-    def select_files(cls, window: tk.Tk, state_label: ttk.Label, event = None):
+    def select_files(
+        cls: Type['UICommandHandler'],
+        window: tk.Tk,
+        state_label: ttk.Label,
+        event: tk.Event = None
+    ) -> None:
         filenames = filedialog.askopenfilenames(title = 'Select files', filetypes = cnf.input_filetypes)
 
         if len(filenames) > 0:
@@ -71,7 +84,15 @@ class UICommandHandler:
 
     # hover effect for file selection state label
     @classmethod
-    def file_selection_state_label_make_hover(cls, event, window: tk.Tk, state_label: ttk.Label, tooltip: Tooltip, action: str):
+    def file_selection_state_label_make_hover(
+        cls: Type['UICommandHandler'],
+        event: tk.Event,
+        window: tk.Tk,
+        state_label:
+        ttk.Label,
+        tooltip: Tooltip,
+        action: str
+    ) -> None:
         if action == 'enter':
             state_label.configure(style = 'HoverFileSelectionState.TLabel')
 
@@ -83,13 +104,23 @@ class UICommandHandler:
 
     # clears file selection by click on label
     @classmethod
-    def clear_file_selection(cls, window: tk.Tk, state_label: ttk.Label, event = None):
+    def clear_file_selection(
+        cls: Type['UICommandHandler'],
+        window: tk.Tk,
+        state_label: ttk.Label,
+        event: tk.Event = None
+    ) -> None:
         cls.selected_files = ()
         cls.update_file_selection_state_label_file_count(window, state_label)
 
     # makes checkbuttons work properly
     @classmethod
-    def on_check(cls, checkbox_identifier: str, checkbox: ttk.Checkbutton, *args):
+    def on_check(
+        cls: Type['UICommandHandler'],
+        checkbox_identifier: str,
+        checkbox: ttk.Checkbutton,
+        *args
+    ) -> None:
         # toggles checkbutton state by XOR with True
         match checkbox_identifier:
             case 'error':
@@ -105,7 +136,7 @@ class UICommandHandler:
 
     # makes minify mode checkbutton disabled when Excel is selected
     @staticmethod
-    def on_check_minify(output_filetype: str, checkbutton: ttk.Checkbutton, *args):
+    def on_check_minify(output_filetype: str, checkbutton: ttk.Checkbutton, *args) -> None:
         if output_filetype == 'xlsx':
             checkbutton.configure(state = tk.DISABLED)
         else:
@@ -113,17 +144,23 @@ class UICommandHandler:
 
     # makes minify mode checkbutton hidden when Excel isnt selected
     @staticmethod
-    def check_minify_enter(output_filetype: str, tooltip: Tooltip, event):
+    def check_minify_enter(output_filetype: str, tooltip: Tooltip, event: tk.Event) -> None:
         if output_filetype == 'xlsx':
             tooltip.show(event)
 
     @staticmethod
-    def check_minify_leave(tooltip: Tooltip, event):
+    def check_minify_leave(tooltip: Tooltip, event: tk.Event) -> None:
         tooltip.hide(event)
 
     # prints message to logger
     @classmethod
-    def cout(cls, window: tk.Tk, console_widget: tk.Text, type: str, msg: str):
+    def cout(
+        cls: Type['UICommandHandler'],
+        window: tk.Tk,
+        console_widget: tk.Text,
+        type: str,
+        msg: str
+    ) -> None:
         msg = f'\n{msg}\n'
 
         condition = cls.check['error'] and type == 'file_validation_error'
@@ -145,12 +182,12 @@ class UICommandHandler:
 
     # prints separator to logger
     @classmethod
-    def csep(cls, window: tk.Tk, console_widget: tk.Text):
+    def csep(cls: Type['UICommandHandler'], window: tk.Tk, console_widget: tk.Text) -> None:
         cls.cout(window, console_widget, 'msg', cnf.console_separator)
 
     # updates progessbar
     @staticmethod
-    def update_progressbar(window: tk.Tk, progressbar: ttk.Progressbar, value: Union[float, int]):
+    def update_progressbar(window: tk.Tk, progressbar: ttk.Progressbar, value: Union[float, int]) -> None:
         progressbar.configure(value = value)
 
         window.update()
@@ -158,7 +195,7 @@ class UICommandHandler:
 
     # makes progressbar show 100 percent when called after finished task
     @classmethod
-    def finish_progressbar(cls, window: tk.Tk, progressbar: ttk.Progressbar):
+    def finish_progressbar(cls: Type['UICommandHandler'], window: tk.Tk, progressbar: ttk.Progressbar) -> None:
         need_to_progress = 100 - progressbar['value']
         time_to_finish = cnf.progressbar_finish_time
         iterations = int(need_to_progress // 0.5)
@@ -170,15 +207,15 @@ class UICommandHandler:
     # main logic
     @classmethod
     def parallel_backend_task(
-        cls,
-        queue,
+        cls: Type['UICommandHandler'],
+        queue: ProcessSafeQueue,
         selected_files: Tuple[str],
         output_filetype: str,
         check: Dict[str, bool],
         min_mode: bool,
         result_file: str,
         operation_weights: Dict[str, int]
-    ):
+    ) -> None:
         # put whole method into try catch to avoid a crash caused by unexpected unhandled exceptions
         try:
             queue.put({
@@ -513,13 +550,13 @@ class UICommandHandler:
     # periodic UI updating by listening the queue
     @classmethod
     def periodic_update_ui(
-        cls,
+        cls: Type['UICommandHandler'],
         window: tk.Tk,
         console_widget: tk.Text,
         progressbar: ttk.Progressbar,
         q: ProcessSafeQueue,
         finalize: Callable[[], None]
-    ):
+    ) -> None:
         try:
             while True:
                 # gets data from queue
@@ -559,7 +596,7 @@ class UICommandHandler:
     # main operations
     @classmethod
     def execute(
-        cls,
+        cls: Type['UICommandHandler'],
         window: tk.Tk,
         console_widget: tk.Text,
         progressbar: ttk.Progressbar,
@@ -567,10 +604,10 @@ class UICommandHandler:
         output_filetype: str,
         elements_to_toggle: HashTable,
         min_mode: bool,
-        event
-    ):
+        event: tk.Event
+    ) -> None:
         # toggles buttons between disabled/enabled state
-        def toggle_ui(state: str):
+        def toggle_ui(state: str) -> None:
             for name, element in elements_to_toggle.items():
                 if state == tk.NORMAL:
                     if 'checkbox' in name and False in cls.check.values() \
@@ -587,7 +624,7 @@ class UICommandHandler:
             window.update_idletasks()
 
         # finalize execution after backend process is over
-        def finalize():
+        def finalize() -> None:
             toggle_ui(tk.NORMAL)
 
         operation_weights = cnf.operation_weights

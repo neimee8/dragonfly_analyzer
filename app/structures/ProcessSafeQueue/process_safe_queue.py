@@ -5,20 +5,20 @@ from config import Config
 from app.structures.ProcessSafeQueue.node import Node
 from app.structures.ProcessSafeQueue.empty_process_safe_queue_error import EmptyProcessSafeQueueError
 
-from typing import Any
+from typing import Any, Self
 
 cnf = Config()
 
 class ProcessSafeQueue:
     # initialization with shared memory data
-    def __init__(self, shared_list, shared_head, shared_tail, shared_lock):
+    def __init__(self: Self, shared_list, shared_head, shared_tail, shared_lock) -> None:
         self._list = shared_list
         self._head = shared_head
         self._tail = shared_tail
         self._lock = shared_lock
 
     # puts after the tail index of the queue
-    def put(self, value: Any):
+    def put(self: Self, value: Any) -> None:
         # locks data while using to avoid conflicts
         with self._lock:
             new_index = len(self._list)
@@ -33,7 +33,7 @@ class ProcessSafeQueue:
             self._list.append(Node(value))
 
     # gets from the head index of the queue
-    def get_nowait(self) -> Any:
+    def get_nowait(self: Self) -> Any:
         with self._lock:
             try:
                 value = self.peek(lock = False)
@@ -53,7 +53,7 @@ class ProcessSafeQueue:
             return value
         
     # shows first element without deleting
-    def peek(self, lock: bool = True) -> Any:
+    def peek(self: Self, lock: bool = True) -> Any:
         if self.is_empty(lock = lock):
             raise EmptyProcessSafeQueueError()
         
@@ -67,7 +67,7 @@ class ProcessSafeQueue:
             return peek_queue()
                 
     # gets size of queue
-    def qsize(self, lock: bool = True) -> int:
+    def qsize(self: Self, lock: bool = True) -> int:
         def get_size() -> int:
             size = 0
             current_index = self._head.value
@@ -85,7 +85,7 @@ class ProcessSafeQueue:
             return get_size()
     
     # check if empty
-    def is_empty(self, lock: bool = True) -> bool:
+    def is_empty(self: Self, lock: bool = True) -> bool:
         if lock:
             with self._lock:
                 return self.qsize() == 0
@@ -93,11 +93,11 @@ class ProcessSafeQueue:
             return self.qsize(lock = False) == 0
     
     # garbage collection
-    def _cleanup(self):
+    def _cleanup(self: Self) -> None:
         self._list[:] = []
         self._head.value = -1
         self._tail.value = -1
     
     # behavior when used len()
-    def __len__(self) -> int:
+    def __len__(self: Self) -> int:
         return self.qsize()

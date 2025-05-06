@@ -1,7 +1,7 @@
 from app.structures.HashTable.node import Node
 
 from collections.abc import Mapping    # for **kwargs
-from typing import Dict, Union, Any
+from typing import Dict, Union, Any, Self
 
 class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots
@@ -111,7 +111,7 @@ class HashTable(Mapping):
             yield key
 
     # Check if HashTable contains a key
-    def __contains__(self, key: Union[str, int]) -> bool:
+    def __contains__(self: Self, key: Union[str, int]) -> bool:
         try:
             self[key]
 
@@ -120,7 +120,7 @@ class HashTable(Mapping):
             return False
 
     # Convert to a regular dictionary (recursive for deep convert) 
-    def to_dict(self) -> Dict[Any, Any]:
+    def to_dict(self: Self) -> Dict[Any, Any]:
         result = {}
 
         for key, value in self.items():
