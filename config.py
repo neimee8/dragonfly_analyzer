@@ -32,8 +32,9 @@ class Config:
         self.img = Imgs()
         self.window_size = (600, 930)
         self.default_start_msg = '\nHello!!!'
-        self.ui_update_interval = 25
+        self.ui_update_interval = 25    # in ms
         self.logger_padding = 15
+        self.psq_max_elements_before_cleanup = 1000    # approx. 700 KB RAM threshold for cleanup
         self.input_filetypes = (
             ('Excel files', '*.xlsx'),
             ('All files', '*.*')

@@ -531,7 +531,7 @@ class UICommandHandler:
                         finalize()
 
                         return
-
+                    
                     if data['key'] == 'progressbar':
                         if data['data'] == 'finish':
                             cls.finish_progressbar(window, progressbar)
