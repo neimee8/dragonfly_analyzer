@@ -4,7 +4,7 @@ from collections.abc import Mapping    # for **kwargs
 
 class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots
-    def __init__(self, capacity=128, **kwargs):
+    def __init__(self, capacity=128, **kwargs): 
         self.capacity = capacity
         self.size = 0
         self.table = [None] * capacity
@@ -117,7 +117,7 @@ class HashTable(Mapping):
         except KeyError:
             return False
 
-    # Convert to a regular dictionary (recursive for deep convert)
+    # Convert to a regular dictionary (recursive for deep convert) 
     def to_dict(self):
         result = {}
 
