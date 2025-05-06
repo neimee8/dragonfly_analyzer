@@ -1,6 +1,6 @@
 from app.structures.HashTable.node import Node
 
-from collections.abc import Mapping    # for **kwargs
+from collections.abc import Mapping
 from typing import Dict, Union, Any, Self
 
 class HashTable(Mapping):

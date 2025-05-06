@@ -20,7 +20,7 @@ import multiprocessing
 import os
 import time
 from pathlib import Path
-from typing import Dict, Union, Tuple, Callable, Type, Any
+from typing import Dict, Union, Tuple, Callable, Type
 import xml.etree.ElementTree as et
 
 import openpyxl
