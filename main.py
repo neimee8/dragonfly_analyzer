@@ -6,7 +6,7 @@ from ui.components.command_handler import UICommandHandler
 from ui.components.widget_manager import WidgetManager
 from ui.components.style_manager import StyleManager
 
-from app.structures.hash_table import HashTable
+from app.structures.HashTable.hash_table import HashTable
 
 import tkinter as tk
 from tkinter import ttk

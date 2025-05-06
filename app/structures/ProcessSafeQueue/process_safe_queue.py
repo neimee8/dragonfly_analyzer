@@ -1,28 +1,8 @@
 """Process-Safe Queue class"""
 
-from dataclasses import dataclass
+from app.structures.ProcessSafeQueue.node import Node
+from app.structures.ProcessSafeQueue.empty_process_safe_queue_error import EmptyProcessSafeQueueError
 
-# exception if empty
-class EmptyProcessSafeQueueError(Exception):
-    def __init__(self, message: str = None):
-        self.message = '<EmptyProcessSafeQueueError: '
-        self.message += message if message else 'ProcessSafeQueue is empty!'
-        self.message += '>'
-
-        super().__init__(self.message)
-
-    def __str__(self):
-        return self.message
-    
-    def __repr__(self):
-        return self.message
-    
-@dataclass
-class Node:
-    value: any
-    next: int = -1
-
-# Process-Safe Queue (use of linked list structure is impossible due to queue usage in multiprocessing)
 class ProcessSafeQueue:
     # initialization with shared memory data
     def __init__(self, shared_list, shared_head, shared_tail, shared_lock):
@@ -31,7 +11,7 @@ class ProcessSafeQueue:
         self._tail = shared_tail
         self._lock = shared_lock
 
-    # puts in the end of the shared list
+    # puts after the tail index of the queue
     def put(self, value: any):
         # locks data while using to avoid conflicts
         with self._lock:
@@ -46,7 +26,7 @@ class ProcessSafeQueue:
 
             self._list.append(Node(value))
 
-    # gets from the beggining of the shared list
+    # gets from the head index of the queue
     def get_nowait(self):
         with self._lock:
             if self.is_empty():
@@ -62,6 +42,7 @@ class ProcessSafeQueue:
 
             return value
                 
+    # gets size of queue
     def qsize(self):
         size = 0
         current_index = self._head.value
@@ -72,5 +53,6 @@ class ProcessSafeQueue:
 
         return size
     
+    # check if empty
     def is_empty(self):
         return self.qsize() == 0

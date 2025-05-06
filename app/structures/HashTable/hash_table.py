@@ -1,4 +1,4 @@
-from app.structures.node import Node
+from app.structures.HashTable.node import Node
 
 from collections.abc import Mapping    # for **kwargs
 

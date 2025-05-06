@@ -10,8 +10,8 @@ from app.error_collector import ErrorCollector
 from app.json_writer import JsonWriter
 from app.xml_writer import XmlWriter
 
-from app.structures.process_safe_queue import ProcessSafeQueue, EmptyProcessSafeQueueError
-from app.structures.hash_table import HashTable
+from app.structures.ProcessSafeQueue.process_safe_queue import ProcessSafeQueue, EmptyProcessSafeQueueError
+from app.structures.HashTable.hash_table import HashTable
 
 import tkinter as tk
 from tkinter import ttk
@@ -531,7 +531,7 @@ class UICommandHandler:
                         finalize()
 
                         return
-                    
+
                     if data['key'] == 'progressbar':
                         if data['data'] == 'finish':
                             cls.finish_progressbar(window, progressbar)

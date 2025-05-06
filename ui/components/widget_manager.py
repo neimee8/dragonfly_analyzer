@@ -1,6 +1,6 @@
 """Tkinter widget manager - stores widgets and packs each in a single call"""
 
-from app.structures.hash_table import HashTable
+from app.structures.HashTable.hash_table import HashTable
 
 import tkinter as tk
 from tkinter import ttk

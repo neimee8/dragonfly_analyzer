@@ -1,6 +1,6 @@
 """Stores all useful constants"""
 
-from app.structures.hash_table import HashTable
+from app.structures.HashTable.hash_table import HashTable
 
 import os
 import PIL
