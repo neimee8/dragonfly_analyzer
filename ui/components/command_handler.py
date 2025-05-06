@@ -517,7 +517,7 @@ class UICommandHandler:
         window: tk.Tk,
         console_widget: tk.Text,
         progressbar: ttk.Progressbar,
-        q: multiprocessing.Queue,
+        q: ProcessSafeQueue,
         finalize: Callable[[], None]
     ):
         try:
