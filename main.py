@@ -1,12 +1,13 @@
 """Main file with tkinter window"""
 
 from config import Config
+
 from ui.components.tooltip import Tooltip
 from ui.components.command_handler import UICommandHandler
 from ui.components.widget_manager import WidgetManager
 from ui.components.style_manager import StyleManager
 
-from app.structures.HashTable.hash_table import HashTable
+from app.structures.HashTable import *
 
 import tkinter as tk
 from tkinter import ttk

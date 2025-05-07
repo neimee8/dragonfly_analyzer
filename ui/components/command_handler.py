@@ -1,6 +1,7 @@
 """Handles frontend events, makes controls work properly"""
 
 from config import Config
+
 from ui.components.tooltip import Tooltip
 
 from app.dragonfly_analyzer import DragonflyAnalyzer
@@ -10,8 +11,8 @@ from app.error_collector import ErrorCollector
 from app.json_writer import JsonWriter
 from app.xml_writer import XmlWriter
 
-from app.structures.ProcessSafeQueue.process_safe_queue import ProcessSafeQueue, EmptyProcessSafeQueueError
-from app.structures.HashTable.hash_table import HashTable
+from app.structures.HashTable import *
+from app.structures.ProcessSafeQueue import *
 
 import tkinter as tk
 from tkinter import ttk
@@ -610,8 +611,8 @@ class UICommandHandler:
         def toggle_ui(state: str) -> None:
             for name, element in elements_to_toggle.items():
                 if state == tk.NORMAL:
-                    if 'checkbox' in name and False in cls.check.values() \
-                        and cls.check[name.removesuffix('_checkbox')]:
+                    if ('checkbox' in name and False in cls.check.values()
+                        and cls.check[name.removesuffix('_checkbox')]):
                         element.configure(state = tk.DISABLED)
                     elif name == 'min_mode_checkbutton' and output_filetype == 'xlsx':
                         element.configure(state = tk.DISABLED)

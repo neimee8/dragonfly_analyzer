@@ -1,5 +1,6 @@
 from app.xlsx_data_validator import XlsxDataValidator
-from app.structures.HashTable.hash_table import HashTable
+
+from app.structures.HashTable import *
 
 class Dragonfly:
     def __init__(self, error_collector, file_name, dragonfly_name="Unnamed"):

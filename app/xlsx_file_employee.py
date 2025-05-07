@@ -1,11 +1,7 @@
 import re
 from pathlib import Path
-from openpyxl.utils import get_column_letter
-from openpyxl.styles import Border, Side
 
 from app.dragonfly_writer import DragonflyWriter
-from app.error_collector import ErrorCollector
-from openpyxl import Workbook
 
 class XlsxFileEmployee:
     def __init__(self, error_collector):
