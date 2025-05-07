@@ -756,7 +756,7 @@ class UICommandHandler:
         shared_list = manager.list()
         shared_head = manager.Value('i', -1)
         shared_tail = manager.Value('i', -1)
-        shared_lock = multiprocessing.Lock()
+        shared_lock = manager.Lock()
 
         queue = ProcessSafeQueue(shared_list, shared_head, shared_tail, shared_lock)
 
