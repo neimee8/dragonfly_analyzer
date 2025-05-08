@@ -112,6 +112,8 @@ class HashTable(Mapping):
 
     # Check if HashTable contains a key
     def __contains__(self: Self, key: Union[str, int]) -> bool:
+        """Checks if the given key is in the object"""
+
         try:
             self[key]
 
@@ -119,12 +121,13 @@ class HashTable(Mapping):
         except KeyError:
             return False
 
-    # Convert to a regular dictionary (recursive for deep convert) 
+    # Convert to a regular dictionary (recursive for deep convert, saves nested lists, tuples and dictionaries) 
     def to_dict(self: Self) -> Dict[Any, Any]:
+        """Converts variable-depth HashTable to dictionary"""
+        
         result = {}
 
         for key, value in self.items():
-
             if isinstance(value, HashTable):
                 result[key] = value.to_dict()
 

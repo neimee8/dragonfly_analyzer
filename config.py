@@ -15,7 +15,11 @@ _CONSTS['STYLES_DIR'] = f'{_CONSTS["ASSETS_DIR"]}styles/'
 
 # class for specific image
 class Img:
+    """Stores data about specific image"""
+
     def __init__(self: Self, name: str) -> None:
+        """Initialize Img with name of json style file"""
+
         self.path: str = _CONSTS['IMG_DIR'] + name
 
         img = PIL.Image.open(self.path)
@@ -23,16 +27,24 @@ class Img:
 
 # class for all images
 class Imgs:
+    """Stores data about all images"""
+
     def __init__(self: Self) -> None:
+        """Initialize Imgs by loading all files from the img directory and creating an Img object for each one"""
+
         for filename in os.listdir(_CONSTS['IMG_DIR']):
             setattr(self, filename.split('.')[0].lower(), Img(filename))
 
 # all data in one class
 class Config:
+    """Stores all useful constants"""
+    
     def __init__(self: Self) -> None:
+        """Initialize Config with all useful data"""
+
         self.img: Imgs = Imgs()
         self.window_size: Tuple[int] = (600, 930)
-        self.default_start_msg: str = '\nHello!!!'
+        self.default_start_msg: str = '\r\nHello!!!'
         self.ui_update_interval: int = 25    # in ms
         self.logger_padding: int = 15
         self.psq_max_elements_before_cleanup: int = 1000    # approx. 700 KB RAM threshold for cleanup

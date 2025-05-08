@@ -7,7 +7,11 @@ from tkinter import ttk
 from typing import Union, Self
 
 class WidgetManager:
+    """Stores tkinter widgets, packs all widgets in it by one call of pack()"""
+    
     def __init__(self: Self) -> None:
+        """Initialize WidgetManager with empty HashTable's for widgets and pack params for each one"""
+
         self._widgets: HashTable = HashTable()
         self._params: HashTable = HashTable()
 
@@ -18,6 +22,8 @@ class WidgetManager:
         name: str = None,
         params: HashTable = None
     ) -> None:
+        """Adds widgets into objects, also can be added name of widget and widget.pack() parametres like pady, padx, anchor etc, as HashTable"""
+
         # if name is given - saving with name as key, otherwise selects an ascending int
         if name:
             self._widgets[name] = widget
@@ -38,6 +44,8 @@ class WidgetManager:
 
     # pack each widget with specified parametres
     def pack(self: Self) -> None:
+        """Applies widget.pack() to all widgets that stored in"""
+
         for key, widget in self._widgets.items():
             params = {}
 
@@ -50,4 +58,6 @@ class WidgetManager:
 
     # standart getter
     def __getitem__(self: Self, name: str) -> Union[tk.Widget, ttk.Widget]:
+        """Returns item by key from _widgets HashTable"""
+    
         return self._widgets[name]

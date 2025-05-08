@@ -8,8 +8,12 @@ from typing import Dict, Any, Self
 import json
 
 class JsonWriter(FileWriter):
+    """Preparing data and writing to json result file"""
+
     # prepares data in the dictionary form
     def get_data(self: Self) -> Dict[str, Any]:
+        """Prepares data about specific dragonfly in dictionary structure"""
+
         data = {}
         square_year_data = HashTable()
 
@@ -51,7 +55,9 @@ class JsonWriter(FileWriter):
     
     # saves given dictionary to JSON file
     @staticmethod
-    def save(data: Dict[str, Any], output_filename: str, min: bool = False):
+    def save(data: Dict[str, Any], output_filename: str, min: bool = False) -> None:
+        """Saves into result file"""
+        
         with open(output_filename, 'w', encoding = 'utf-8') as file:
             if min:
                 json.dump(data, file, separators = (',', ':'))

@@ -7,8 +7,12 @@ import xml.dom.minidom
 from typing import Self
 
 class XmlWriter(FileWriter):
+    """Preparing data and writing to xml result file"""
+
     # prepares data in the tree form and returns a root
     def get_data(self: Self, dragonfly_name: str) -> et.Element:
+        """Prepares data about specific dragonfly in tree structure"""
+
         root = et.Element('Dragonfly')
         root.set('dragonfly', dragonfly_name)
 
@@ -214,7 +218,9 @@ class XmlWriter(FileWriter):
 
     # saves given tree to XML file
     @staticmethod
-    def save(data: et.ElementTree, output_filename: str, min: bool):
+    def save(data: et.ElementTree, output_filename: str, min: bool) -> None:
+        """Saves into result file"""
+        
         if min:
             data.write(output_filename, encoding = 'utf-8', xml_declaration = True)
         else:

@@ -29,6 +29,8 @@ import openpyxl
 cnf = Config()
 
 class UICommandHandler:
+    """Handles all frontend events"""
+
     selected_files: Tuple[str] = ()
     check: HashTable = HashTable(
         error = False,
@@ -42,6 +44,8 @@ class UICommandHandler:
         window: tk.Tk,
         state_label: ttk.Label
     ) -> None:
+        """Updates file count in file selection state label"""
+
         text = f'{len(cls.selected_files)} file'
         text += 's' if len(cls.selected_files) != 1 else ''
         text += ' selected'
@@ -58,6 +62,8 @@ class UICommandHandler:
         window: tk.Tk,
         state_label: ttk.Label
     ) -> None:
+        """Updates file selection state label style according to selected files count"""
+
         if len(cls.selected_files) == 0:
             state_label.configure(style = 'InvalidFileSelectionState.TLabel')
         else:
@@ -74,6 +80,8 @@ class UICommandHandler:
         state_label: ttk.Label,
         event: tk.Event = None
     ) -> None:
+        """Handles file selection button"""
+
         filenames = filedialog.askopenfilenames(title = 'Select files', filetypes = cnf.input_filetypes)
 
         if len(filenames) > 0:
@@ -94,6 +102,8 @@ class UICommandHandler:
         tooltip: Tooltip,
         action: str
     ) -> None:
+        """Adds hover effect for file selection state label"""
+
         if action == 'enter':
             state_label.configure(style = 'HoverFileSelectionState.TLabel')
 
@@ -111,6 +121,8 @@ class UICommandHandler:
         state_label: ttk.Label,
         event: tk.Event = None
     ) -> None:
+        """Clears all files from selection and updates file selection state label if clicked"""
+
         cls.selected_files = ()
         cls.update_file_selection_state_label_file_count(window, state_label)
 
@@ -122,6 +134,8 @@ class UICommandHandler:
         checkbox: ttk.Checkbutton,
         *args
     ) -> None:
+        """Makes imposiible to turn off two checkboxes at one time - only one of these can be turned off at the same time"""
+
         # toggles checkbutton state by XOR with True
         match checkbox_identifier:
             case 'error':
@@ -138,6 +152,8 @@ class UICommandHandler:
     # makes minify mode checkbutton disabled when Excel is selected
     @staticmethod
     def on_check_minify(output_filetype: str, checkbutton: ttk.Checkbutton, *args) -> None:
+        """Makes minify checkbox disabled when Excel output file type is selected"""
+
         if output_filetype == 'xlsx':
             checkbutton.configure(state = tk.DISABLED)
         else:
@@ -146,11 +162,15 @@ class UICommandHandler:
     # makes minify mode checkbutton hidden when Excel isnt selected
     @staticmethod
     def check_minify_enter(output_filetype: str, tooltip: Tooltip, event: tk.Event) -> None:
+        """Makes Tooltip visible when mouse enters checkbox widget if Excel output file type is selected"""
+
         if output_filetype == 'xlsx':
             tooltip.show(event)
 
     @staticmethod
     def check_minify_leave(tooltip: Tooltip, event: tk.Event) -> None:
+        """Makes Tooltip invisible when mouse left checkbox widget"""
+
         tooltip.hide(event)
 
     # prints message to logger
@@ -162,7 +182,9 @@ class UICommandHandler:
         type: str,
         msg: str
     ) -> None:
-        msg = f'\n{msg}\n'
+        """Prints messages to logger widget"""
+
+        msg = f'\r\n{msg}\r\n'
 
         condition = cls.check['error'] and type == 'file_validation_error'
         condition = condition or (cls.check['report'] and type == 'report')
@@ -184,11 +206,15 @@ class UICommandHandler:
     # prints separator to logger
     @classmethod
     def csep(cls: Type['UICommandHandler'], window: tk.Tk, console_widget: tk.Text) -> None:
+        """Prints separator to logger widget"""
+
         cls.cout(window, console_widget, 'msg', cnf.console_separator)
 
     # updates progessbar
     @staticmethod
     def update_progressbar(window: tk.Tk, progressbar: ttk.Progressbar, value: Union[float, int]) -> None:
+        """Updates progressbar value"""
+
         progressbar.configure(value = value)
 
         window.update()
@@ -197,6 +223,8 @@ class UICommandHandler:
     # makes progressbar show 100 percent when called after finished task
     @classmethod
     def finish_progressbar(cls: Type['UICommandHandler'], window: tk.Tk, progressbar: ttk.Progressbar) -> None:
+        """Smoothly finishes the progressbar"""
+
         need_to_progress = 100 - progressbar['value']
         time_to_finish = cnf.progressbar_finish_time
         iterations = int(need_to_progress // 0.5)
@@ -217,6 +245,8 @@ class UICommandHandler:
         result_file: str,
         operation_weights: Dict[str, int]
     ) -> None:
+        """"File analyze and assembly to result file"""
+
         # put whole method into try catch to avoid a crash caused by unexpected unhandled exceptions
         try:
             queue.put({
@@ -241,7 +271,7 @@ class UICommandHandler:
                 }
             })
 
-            msg = f'Files: {len(selected_files)}\nOutput file type: '
+            msg = f'Files: {len(selected_files)}\r\nOutput file type: '
             msg += 'Excel' if output_filetype == 'xlsx' else output_filetype.upper()
 
             queue.put({
@@ -558,6 +588,8 @@ class UICommandHandler:
         q: ProcessSafeQueue,
         finalize: Callable[[], None]
     ) -> None:
+        """Gets data out of ProcessSafeQueue while parallel backend task is executing and updates logger and progressbar"""
+
         try:
             while True:
                 # gets data from queue
@@ -607,6 +639,8 @@ class UICommandHandler:
         min_mode: bool,
         event: tk.Event
     ) -> None:
+        """Validates files and starts file analyze and assembly in parallel process"""
+        
         # toggles buttons between disabled/enabled state
         def toggle_ui(state: str) -> None:
             for name, element in elements_to_toggle.items():
@@ -680,7 +714,7 @@ class UICommandHandler:
             
         # error throwing
         for i, file in enumerate(doesnt_exist + invalid_files):
-            line_break = '\n' if i == 0 else ''
+            line_break = '\r\n' if i == 0 else ''
 
             if file in doesnt_exist:
                 cls.cout(
@@ -703,7 +737,7 @@ class UICommandHandler:
                 window,
                 console_widget,
                 'bold_error',
-                '\nExecution have stopped: no valid files found'
+                '\r\nExecution have stopped: no valid files found'
             )
 
             toggle_ui(tk.NORMAL)
