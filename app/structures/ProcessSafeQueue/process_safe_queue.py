@@ -50,7 +50,7 @@ class ProcessSafeQueue:
 
     # gets from the head index of the queue
     def get_nowait(self: Self) -> Any:
-        """Gets data form the head index"""
+        """Gets data from the head index"""
 
         with self._lock:
             try:
