@@ -4,7 +4,8 @@ import warnings
 from app.xlsx_data_validator import XlsxDataValidator
 from app.dragonfly import Dragonfly
 from app.check_helper import CheckHelper
-from app.structures.HashTable.hash_table import HashTable
+
+from app.structures.HashTable import *
 
 warnings.simplefilter("ignore", UserWarning)
 

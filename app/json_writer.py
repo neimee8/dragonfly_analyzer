@@ -2,7 +2,7 @@
 
 from app.file_writer import FileWriter
 
-from app.structures.HashTable.hash_table import HashTable
+from app.structures.HashTable import *
 
 from typing import Dict, Any, Self
 import json
