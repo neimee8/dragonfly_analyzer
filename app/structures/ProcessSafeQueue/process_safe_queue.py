@@ -130,6 +130,7 @@ class ProcessSafeQueue:
 
         return self.qsize()
     
+    # string represantation
     def __str__(self: Self) -> str:
         """Returns a string representation of the queue, showing all its elements"""
 
@@ -156,7 +157,14 @@ class ProcessSafeQueue:
                     current_index = node.next
 
             return out
+        
+    # checks if the value is in the queue
+    def contains(self: Self, item: Any) -> None:
+        """Checks if the given value is in the queue"""
+
+        return self.__contains__(item)
     
+    # string representation
     def __repr__(self: Self) -> str:
         """Returns a string representation of the ProcessSafeQueue instance"""
 
@@ -165,6 +173,7 @@ class ProcessSafeQueue:
 
         return out
     
+    # standart iterator
     def __iter__(self: Self) -> Iterator[Any]:
         """Iterates over the elements in the queue"""
 
@@ -177,6 +186,7 @@ class ProcessSafeQueue:
 
                 current_index = node.next
 
+    # checks if the value is in the queue
     def __contains__(self: Self, item: Any) -> bool:
         """Checks if the given value is in the queue"""
 
