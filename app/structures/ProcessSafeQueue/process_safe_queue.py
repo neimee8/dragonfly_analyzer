@@ -115,10 +115,23 @@ class ProcessSafeQueue:
                 return self.qsize() == 0
         else:
             return self.qsize(lock = False) == 0
+        
+    # checks if the value is in the queue
+    def contains(self: Self, item: Any) -> bool:
+        """Checks if the given value is in the queue"""
+
+        return self.__contains__(item)
     
-    # garbage collection
+    # clears the queue by request
+    def clear(self: Self) -> None:
+        """Clears the queue by request"""
+
+        with self._lock:
+            self._cleanup()
+    
+    # clears the queue
     def _cleanup(self: Self) -> None:
-        """Cleans up a queue"""
+        """Clears the queue"""
 
         self._list[:] = []
         self._head.value = -1
@@ -126,7 +139,7 @@ class ProcessSafeQueue:
     
     # behavior when used len()
     def __len__(self: Self) -> int:
-        """Returns size of queue"""
+        """Returns the size of queue"""
 
         return self.qsize()
     
@@ -157,12 +170,6 @@ class ProcessSafeQueue:
                     current_index = node.next
 
             return out
-        
-    # checks if the value is in the queue
-    def contains(self: Self, item: Any) -> None:
-        """Checks if the given value is in the queue"""
-
-        return self.__contains__(item)
     
     # string representation
     def __repr__(self: Self) -> str:
