@@ -26,6 +26,7 @@ if __name__ == '__main__':
     root.title(cnf.window_title)
     styles = StyleManager('main').get()
 
+    # setting up window size
     screen_size = (
         root.winfo_screenwidth(),
         root.winfo_screenheight()
