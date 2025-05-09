@@ -5,7 +5,8 @@
 
 ### izskaidrosiet kādas Python bibliotēkas un kāpēc tiek izmantotas projekta izstrādes laikā
 pandas - для чтения excel файлов
-openpyxl - для записи excel файлов 
+openpyxl - для записи и валидации excel файлов
+Pillow - для отображения картинок в GUI
 
 ### projekta izstrādes laikā jāizmanto savas definētas datu struktūras
 ProcessSafeQueue
