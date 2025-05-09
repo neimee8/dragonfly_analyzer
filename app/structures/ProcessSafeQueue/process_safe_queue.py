@@ -124,7 +124,7 @@ class ProcessSafeQueue:
     
     # clears the queue by request
     def clear(self: Self) -> None:
-        """Clears the queue by request"""
+        """Clears the queue by calling internal _cleanup method"""
 
         with self._lock:
             self._cleanup()
