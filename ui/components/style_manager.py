@@ -1,10 +1,9 @@
 """Manages styles in JSON format"""
 
-from config import Config
-
 from tkinter import ttk
 import json
-from typing import Self
+
+from config import Config
 
 cnf = Config()
 
@@ -12,13 +11,13 @@ class StyleManager:
     """Loads styles from style JSON data files by the name of file"""
 
     # uploads the json style data
-    def __init__(self: Self, name: str) -> None:
+    def __init__(self, name: str) -> None:
         """Initialize StyleManager with name of json style file"""
 
         self.path: str = f'{cnf.STYLES_DIR + name}.json'
 
     # returns ready-to-use style object
-    def get(self: Self) -> ttk.Style:
+    def get(self) -> ttk.Style:
         """Returns ready-to-use ttk.Style object that may be used in project"""
         
         style = ttk.Style()

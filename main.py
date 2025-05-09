@@ -1,5 +1,11 @@
 """Main file with tkinter window"""
 
+import tkinter as tk
+from tkinter import ttk
+import PIL
+import PIL.Image
+import PIL.ImageTk
+
 from config import Config
 
 from ui.components.tooltip import Tooltip
@@ -9,12 +15,6 @@ from ui.components.style_manager import StyleManager
 
 from app.structures.HashTable import *
 
-import tkinter as tk
-from tkinter import ttk
-import PIL
-import PIL.Image
-import PIL.ImageTk
-
 if __name__ == '__main__':
     # initializing objects
     cnf = Config()
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     # get started with styles and window
     root = tk.Tk()
-    root.title('Dragonfly analizer')
+    root.title(cnf.window_title)
     styles = StyleManager('main').get()
 
     screen_size = (

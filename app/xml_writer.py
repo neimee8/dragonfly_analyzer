@@ -1,16 +1,15 @@
 """Prepares and writes data to XML"""
 
-from app.file_writer import FileWriter
-
 import xml.etree.ElementTree as et
 import xml.dom.minidom
-from typing import Self
+
+from app.file_writer import FileWriter
 
 class XmlWriter(FileWriter):
     """Preparing data and writing to xml result file"""
 
     # prepares data in the tree form and returns a root
-    def get_data(self: Self, dragonfly_name: str) -> et.Element:
+    def get_data(self, dragonfly_name: str) -> et.Element:
         """Prepares data about specific dragonfly in tree structure"""
 
         root = et.Element('Dragonfly')

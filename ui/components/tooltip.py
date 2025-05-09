@@ -1,16 +1,16 @@
 """Tooltip widget - extension for tkinter"""
 
-from ui.components.style_manager import StyleManager
-
 import tkinter as tk
 from tkinter import ttk
-from typing import Union, Self
+from typing import Union
+
+from ui.components.style_manager import StyleManager
 
 class Tooltip:
     """Tooltip widget - works like title attribute in HTML"""
 
     def __init__(
-        self: Self,
+        self,
         widget: Union[tk.Widget, ttk.Widget],
         text: str,
         listen_mouse_enter: bool = True
@@ -25,7 +25,7 @@ class Tooltip:
             self.widget.bind('<Enter>', self.show)
             self.widget.bind('<Leave>', self.hide)
 
-    def show(self: Self, event: tk.Event) -> None:
+    def show(self, event: tk.Event) -> None:
         """Makes Tooltip visible"""
 
         # creates toplevel window without controls
@@ -41,7 +41,7 @@ class Tooltip:
         tooltip_label = ttk.Label(self.tooltip_container, text = self.text, style = 'Tooltip.TLabel')
         tooltip_label.pack()
 
-    def hide(self: Self, event: tk.Event) -> None:
+    def hide(self, event: tk.Event) -> None:
         """Hides Tooltip"""
         
         if self.tooltip_container:

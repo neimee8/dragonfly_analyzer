@@ -1,17 +1,17 @@
 """Prepares and writes data to JSON"""
 
+from typing import Dict, Any
+import json
+
 from app.file_writer import FileWriter
 
 from app.structures.HashTable import *
-
-from typing import Dict, Any, Self
-import json
 
 class JsonWriter(FileWriter):
     """Preparing data and writing to json result file"""
 
     # prepares data in the dictionary form
-    def get_data(self: Self) -> Dict[str, Any]:
+    def get_data(self) -> Dict[str, Any]:
         """Prepares data about specific dragonfly in dictionary structure"""
 
         data = {}

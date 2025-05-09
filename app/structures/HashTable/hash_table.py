@@ -1,7 +1,7 @@
-from app.structures.HashTable.node import Node
-
 from collections.abc import Mapping
 from typing import Dict, Union, Any, Self
+
+from app.structures.HashTable.node import Node
 
 class HashTable(Mapping):
     # Creates a new HashTable with a capacity of 128 slots

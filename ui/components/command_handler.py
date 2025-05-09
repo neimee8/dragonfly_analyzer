@@ -1,5 +1,17 @@
 """Handles frontend events, makes controls work properly"""
 
+import tkinter as tk
+from tkinter import ttk
+from tkinter import filedialog
+import multiprocessing
+import os
+import time
+from pathlib import Path
+from typing import Dict, Union, Tuple, Callable
+import xml.etree.ElementTree as et
+
+import openpyxl
+
 from config import Config
 
 from ui.components.tooltip import Tooltip
@@ -13,18 +25,6 @@ from app.xml_writer import XmlWriter
 
 from app.structures.HashTable import *
 from app.structures.ProcessSafeQueue import *
-
-import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog
-import multiprocessing
-import os
-import time
-from pathlib import Path
-from typing import Dict, Union, Tuple, Callable, Type
-import xml.etree.ElementTree as et
-
-import openpyxl
 
 cnf = Config()
 
@@ -40,7 +40,7 @@ class UICommandHandler:
     # updates file selection state label file count
     @classmethod
     def update_file_selection_state_label_file_count(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         state_label: ttk.Label
     ) -> None:
@@ -58,7 +58,7 @@ class UICommandHandler:
     # updates the style of file selection state label
     @classmethod
     def update_file_selection_state_label_style(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         state_label: ttk.Label
     ) -> None:
@@ -75,7 +75,7 @@ class UICommandHandler:
     # makes possible to select multiple input files
     @classmethod
     def select_files(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         state_label: ttk.Label,
         event: tk.Event = None
@@ -94,7 +94,7 @@ class UICommandHandler:
     # hover effect for file selection state label
     @classmethod
     def file_selection_state_label_make_hover(
-        cls: Type['UICommandHandler'],
+        cls,
         event: tk.Event,
         window: tk.Tk,
         state_label:
@@ -116,7 +116,7 @@ class UICommandHandler:
     # clears file selection by click on label
     @classmethod
     def clear_file_selection(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         state_label: ttk.Label,
         event: tk.Event = None
@@ -129,7 +129,7 @@ class UICommandHandler:
     # makes checkbuttons work properly
     @classmethod
     def on_check(
-        cls: Type['UICommandHandler'],
+        cls,
         checkbox_identifier: str,
         checkbox: ttk.Checkbutton,
         *args
@@ -176,7 +176,7 @@ class UICommandHandler:
     # prints message to logger
     @classmethod
     def cout(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         console_widget: tk.Text,
         type: str,
@@ -205,7 +205,7 @@ class UICommandHandler:
 
     # prints separator to logger
     @classmethod
-    def csep(cls: Type['UICommandHandler'], window: tk.Tk, console_widget: tk.Text) -> None:
+    def csep(cls, window: tk.Tk, console_widget: tk.Text) -> None:
         """Prints separator to logger widget"""
 
         cls.cout(window, console_widget, 'msg', cnf.console_separator)
@@ -222,7 +222,7 @@ class UICommandHandler:
 
     # makes progressbar show 100 percent when called after finished task
     @classmethod
-    def finish_progressbar(cls: Type['UICommandHandler'], window: tk.Tk, progressbar: ttk.Progressbar) -> None:
+    def finish_progressbar(cls, window: tk.Tk, progressbar: ttk.Progressbar) -> None:
         """Smoothly finishes the progressbar"""
 
         need_to_progress = 100 - progressbar['value']
@@ -236,7 +236,7 @@ class UICommandHandler:
     # main logic
     @classmethod
     def parallel_backend_task(
-        cls: Type['UICommandHandler'],
+        cls,
         queue: ProcessSafeQueue,
         selected_files: Tuple[str],
         output_filetype: str,
@@ -581,7 +581,7 @@ class UICommandHandler:
     # periodic UI updating by listening the queue
     @classmethod
     def periodic_update_ui(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         console_widget: tk.Text,
         progressbar: ttk.Progressbar,
@@ -629,7 +629,7 @@ class UICommandHandler:
     # main operations
     @classmethod
     def execute(
-        cls: Type['UICommandHandler'],
+        cls,
         window: tk.Tk,
         console_widget: tk.Text,
         progressbar: ttk.Progressbar,
@@ -787,6 +787,7 @@ class UICommandHandler:
             cls.update_file_selection_state_label_file_count(window, state_label)
             cls.update_file_selection_state_label_style(window, state_label)
 
+        # gets shared list, head, tail and lock to initialize ProcessSafeQueue
         manager = multiprocessing.Manager()
         shared_list = manager.list()
         shared_head = manager.Value('i', -1)

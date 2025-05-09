@@ -1,12 +1,12 @@
 """Process-Safe Queue class"""
 
+from typing import Any, Iterator
+from multiprocessing.managers import ListProxy, ValueProxy
+
 from config import Config
 
 from app.structures.ProcessSafeQueue.node import Node
 from app.structures.ProcessSafeQueue.empty_process_safe_queue_error import EmptyProcessSafeQueueError
-
-from typing import Any, Self, Iterator
-from multiprocessing.managers import ListProxy, ValueProxy
 
 cnf = Config()
 
@@ -15,7 +15,7 @@ class ProcessSafeQueue:
 
     # initialization with shared memory data
     def __init__(
-        self: Self,
+        self,
         shared_list: ListProxy,
         shared_head: ValueProxy,
         shared_tail: ValueProxy,
@@ -29,7 +29,7 @@ class ProcessSafeQueue:
         self._lock = shared_lock
 
     # puts after the tail index of the queue
-    def put(self: Self, value: Any) -> None:
+    def put(self, value: Any) -> None:
         """Puts data after the tail index"""
 
         # locks data while using to avoid conflicts
@@ -49,7 +49,7 @@ class ProcessSafeQueue:
             self._list.append(Node(value))
 
     # gets from the head index of the queue
-    def get_nowait(self: Self) -> Any:
+    def get_nowait(self) -> Any:
         """Gets data from the head index"""
 
         with self._lock:
@@ -71,7 +71,7 @@ class ProcessSafeQueue:
             return value
         
     # shows first element without deleting
-    def peek(self: Self, lock: bool = True) -> Any:
+    def peek(self, lock: bool = True) -> Any:
         """Shows head index element without deleting"""
 
         if self.is_empty(lock = lock):
@@ -87,7 +87,7 @@ class ProcessSafeQueue:
             return peek_queue()
                 
     # gets size of queue
-    def qsize(self: Self, lock: bool = True) -> int:
+    def qsize(self, lock: bool = True) -> int:
         """Returns queue size"""
     
         def get_size() -> int:
@@ -107,7 +107,7 @@ class ProcessSafeQueue:
             return get_size()
     
     # check if empty
-    def is_empty(self: Self, lock: bool = True) -> bool:
+    def is_empty(self, lock: bool = True) -> bool:
         """Checks if queue is empty"""
 
         if lock:
@@ -117,20 +117,20 @@ class ProcessSafeQueue:
             return self.qsize(lock = False) == 0
         
     # checks if the value is in the queue
-    def contains(self: Self, item: Any) -> bool:
+    def contains(self, item: Any) -> bool:
         """Checks if the given value is in the queue"""
 
         return self.__contains__(item)
     
     # clears the queue by request
-    def clear(self: Self) -> None:
+    def clear(self) -> None:
         """Clears the queue by calling internal _cleanup method"""
 
         with self._lock:
             self._cleanup()
     
     # clears the queue
-    def _cleanup(self: Self) -> None:
+    def _cleanup(self) -> None:
         """Clears the queue"""
 
         self._list[:] = []
@@ -138,13 +138,13 @@ class ProcessSafeQueue:
         self._tail.value = -1
     
     # behavior when used len()
-    def __len__(self: Self) -> int:
+    def __len__(self) -> int:
         """Returns the size of queue"""
 
         return self.qsize()
     
     # string represantation
-    def __str__(self: Self) -> str:
+    def __str__(self) -> str:
         """Returns a string representation of the queue, showing all its elements"""
 
         with self._lock:
@@ -172,7 +172,7 @@ class ProcessSafeQueue:
             return out
     
     # string representation
-    def __repr__(self: Self) -> str:
+    def __repr__(self) -> str:
         """Returns a string representation of the ProcessSafeQueue instance"""
 
         out = f'<{self.__class__.__name__}>: '
@@ -181,7 +181,7 @@ class ProcessSafeQueue:
         return out
     
     # standart iterator
-    def __iter__(self: Self) -> Iterator[Any]:
+    def __iter__(self) -> Iterator[Any]:
         """Iterates over the elements in the queue"""
 
         with self._lock:
@@ -194,7 +194,7 @@ class ProcessSafeQueue:
                 current_index = node.next
 
     # checks if the value is in the queue
-    def __contains__(self: Self, item: Any) -> bool:
+    def __contains__(self, item: Any) -> bool:
         """Checks if the given value is in the queue"""
 
         with self._lock:

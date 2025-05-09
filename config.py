@@ -1,11 +1,11 @@
 """Stores all useful constants"""
 
-from app.structures.HashTable import *
-
 import os
 import PIL
 import PIL.Image
-from typing import Tuple, Self, List
+from typing import Tuple, List
+
+from app.structures.HashTable import *
 
 # saves needed paths
 _CONSTS = HashTable()
@@ -17,7 +17,7 @@ _CONSTS['STYLES_DIR'] = f'{_CONSTS["ASSETS_DIR"]}styles/'
 class Img:
     """Stores data about specific image"""
 
-    def __init__(self: Self, name: str) -> None:
+    def __init__(self, name: str) -> None:
         """Initialize Img with name of json style file"""
 
         self.path: str = _CONSTS['IMG_DIR'] + name
@@ -29,7 +29,7 @@ class Img:
 class Imgs:
     """Stores data about all images"""
 
-    def __init__(self: Self) -> None:
+    def __init__(self) -> None:
         """Initialize Imgs by loading all files from the img directory and creating an Img object for each one"""
 
         for filename in os.listdir(_CONSTS['IMG_DIR']):
@@ -39,12 +39,13 @@ class Imgs:
 class Config:
     """Stores all useful constants"""
     
-    def __init__(self: Self) -> None:
+    def __init__(self) -> None:
         """Initialize Config with all useful data"""
 
         self.img: Imgs = Imgs()
         self.window_size: Tuple[int] = (600, 930)
         self.default_start_msg: str = '\r\nHello!!!'
+        self.window_title = 'Dragonfly analyzer'
         self.ui_update_interval: int = 25    # in ms
         self.logger_padding: int = 15
         self.psq_max_elements_before_cleanup: int = 1000    # approx. 700 KB RAM threshold for cleanup
