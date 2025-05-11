@@ -55,6 +55,7 @@ if __name__ == '__main__':
     checkbox_identifier[error_checkbox_var._name] = 'error'
     checkbox_identifier[report_checkbox_var._name] = 'report'
 
+    # setting favicon
     favicon = PIL.Image.open(cnf.img.favicon.path)
     favicon = PIL.ImageTk.PhotoImage(favicon)
     root.iconphoto(False, favicon)
