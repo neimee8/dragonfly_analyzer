@@ -41,15 +41,15 @@ class XmlWriter(FileWriter):
         elements['temperature'] = et.SubElement(root, 'Temperature')
 
         elements['avg_temp_by_year'] = {}
-        avg_temp_by_year = et.SubElement(elements['temperature'], 'AvgTempByYear')
+        avg_temp_by_year = et.SubElement(elements['temperature'], 'AvgTemperatureByYear')
 
         for key, val in self.dragonfly.avg_temp_by_year.items():
-            elements['avg_temp_by_year'][key] = et.SubElement(avg_temp_by_year, 'Temp')
+            elements['avg_temp_by_year'][key] = et.SubElement(avg_temp_by_year, 'Temperature')
             elements['avg_temp_by_year'][key].set('year', str(key))
             elements['avg_temp_by_year'][key].text = str(val)
 
         elements['square_year_temp'] = {}
-        elements['square_year_temp']['root'] = et.SubElement(elements['temperature'], 'SquareYearTemp')
+        elements['square_year_temp']['root'] = et.SubElement(elements['temperature'], 'SquareYearTemperature')
         squares = []
 
         for el in self.dragonfly.square_year_temp:
@@ -64,10 +64,10 @@ class XmlWriter(FileWriter):
             elements['square_year_temp'][str(el['square']) + str(el['year'])].text = str(el['temperature'])
 
         elements['avg_temp_by_square'] = {}
-        avg_temp_by_square = et.SubElement(elements['temperature'], 'AvgTempBySquare')
+        avg_temp_by_square = et.SubElement(elements['temperature'], 'AvgTemperatureBySquare')
 
         for key, val in self.dragonfly.avg_temp_by_square.items():
-            elements['avg_temp_by_square'][key] = et.SubElement(avg_temp_by_square, 'Temp')
+            elements['avg_temp_by_square'][key] = et.SubElement(avg_temp_by_square, 'Temperature')
             elements['avg_temp_by_square'][key].set('square', str(key))
             elements['avg_temp_by_square'][key].text = str(val)
 

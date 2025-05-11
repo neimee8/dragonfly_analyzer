@@ -23,15 +23,28 @@ class JsonWriter(FileWriter):
         square_year_data['water'] = self.dragonfly.square_year_water
         square_year_data['shading'] = self.dragonfly.square_year_shading
 
+        square_year_clouds_new = []
+
+        for i, item in enumerate(square_year_data['clouds']):
+            square_year_clouds_new.append(HashTable())
+
+            for key, val in item.items():
+                if key == 'clouds':
+                    square_year_clouds_new[i]['cloudiness'] = val
+                else:
+                    square_year_clouds_new[i][key] = val
+
+        square_year_data['clouds'] = square_year_clouds_new
+
         data['count'] = {}
         data['count']['total_count'] = self.dragonfly.total_count
         data['count']['count_by_year'] = self.dragonfly.count_by_year.to_dict()
         data['count']['count_by_square'] = self.dragonfly.count_by_square.to_dict()
 
         data['temperature'] = {}
-        data['temperature']['avg_temp_by_year'] = self.dragonfly.avg_temp_by_year.to_dict()
-        data['temperature']['square_year_temp'] = square_year_data.to_dict()['temp']
-        data['temperature']['avg_temp_by_square'] = self.dragonfly.avg_temp_by_square.to_dict()
+        data['temperature']['avg_temperature_by_year'] = self.dragonfly.avg_temp_by_year.to_dict()
+        data['temperature']['square_year_temperature'] = square_year_data.to_dict()['temp']
+        data['temperature']['avg_temperature_by_square'] = self.dragonfly.avg_temp_by_square.to_dict()
 
         data['wind'] = {}
         data['wind']['avg_wind_by_year'] = self.dragonfly.avg_wind_by_year.to_dict()
