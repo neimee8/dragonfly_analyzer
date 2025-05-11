@@ -1,27 +1,73 @@
-### detalizēti aprakstīsiet projekta uzdevumu
-вывести индикаторные виды стрекоз 
-для этого нужно проанализировать большой объем данных -> он обратился к нам 
-файлы постоянно могут обновлятся 
+# Dragonfly Analyzer
+<img src="ui/assets/img/dragonfly.png" alt="Dragonfly Analyzer" width="300"/>
 
-### izskaidrosiet kādas Python bibliotēkas un kāpēc tiek izmantotas projekta izstrādes laikā
-pandas - для чтения excel файлов
-openpyxl - для записи и валидации excel файлов
-Pillow - для отображения картинок в GUI
+### 📹 Demonstrācija
+--- 
 
-### projekta izstrādes laikā jāizmanto savas definētas datu struktūras
-ProcessSafeQueue
-HashTable
-DragonflyAnalyzer - класс которые отвечает за логику анализа данных 
-...
-... (накидать по всем классам и че они делают и для чего)
+### 📌 Projekta uzdevums
+---
 
-### aprakstīsies programmatūras izmantošanas metodes
-Как пользователь запускает программу — через командную строку, графический интерфейс, веб-страницу и т.д.
+**Dragonfly Analyzer** ir rīks, kas automatizēti apkopo un sagatavo statistikas pārskatus, pamatojoties uz lauka novērojumiem par spārēm.
+Tas paredzēts biologi un ekologi atbalstam, kuri strādā ar indikatoru sugām — sugām, kuru skaits ir īpaši jutīgs pret vides pārmaiņām.
 
-Какие есть функции/возможности — например, ввод данных, запуск анализа, просмотр отчётов.
+Programma apstrādā Excel failus (_datu faila piemērs: link_) ar datiem par sugām un veido kopsavilkuma pārskatu.
 
-Как взаимодействовать с программой — кнопки, команды, аргументы запуска, формы.
+📊 Rezultāta pārskatā ietvertā informācija:
+* Kopējais īpatņu skaits 
+* Skaits pa gadiem 
+* Skaits pa kvadrātiem 
+* Skaita dinamika pa gadiem 
+* Vidējā temperatūra, mākoņu daudzums un vēja stiprums:
+    * pa gadiem 
+    * pa kvadrātiem 
+    * dinamika pa gadiem 
+* Pārsvarā novērotie ūdens apstākļi
+* Ūdens apstākļu dinamika 
+* Pārsvarā novērotā noēnojuma pakāpe 
+* Noēnojuma dinamika
 
-Примеры сценариев использования — что делает пользователь, чтобы достичь результата (например: "пользователь вводит список чисел → нажимает кнопку 'Анализ' → программа показывает среднее значение").
+Programma neaizstāj biologu, bet automatizē rutīnas aprēķinus un pārskatu struktūras izveidi, ļaujot speciālistiem koncentrēties uz datu interpretāciju, kā arī izmantot rezultātus nākamajos, sarežģītākos analīzes posmos, piemēram, TWINSPAN klasifikācijā.
 
-### Var pievienot video (saiti uz to), kurā būs parādīts jūsu programmatūras darbībā un rezultāts.
+Rezultāta pārskatu iespējams saglabāt trīs dažādos formātos: **JSON**, **XML** vai **Excel** atkarībā no lietotāja izvēles.
+
+Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam studentam biologam paātrināt datu sagatavošanu viņa bakalaura darbam bioloģijā.
+
+### 🐍 Python bibliotēkas izmantotas projekta izstrādes laikā
+---
+
+  #### 📦 Trešo pušu bibliotēkas:
+  * `pandas` — datu tabulu analīzei; izmantota datu ielādei un apstrādei no Excel failiem.
+  * `openpyxl` — Excel failu lasīšanai un rakstīšanai ar formatējumu.
+
+  #### 🧰 Standarta Python moduļi:
+  * `pathlib` - ceļu un failu struktūras apstrādei.
+  * `numbers`- abstraktu skaitlisko tipu pārbaudei un validācijai.
+  * `re` - regulāro izteiksmju izmantošanai (piemēram, failu nosaukumu apstrādei).
+    
+### 🧱 Projekta izstrādes laikā izmantotas pašdefinētas datu struktūras 
+---
+
+* `HashTable` — pielāgota datu struktūra, kas atkārto `dict` uzvedību. Tās izmērs tiek dinamiski palielināts (kad piepildījums sasniedz 70%), nodrošinot efektīvu darbību ar lieliem datu apjomiem.
+
+  #### 🧩 Pārējās svarīgākās programmas daļas (kas nav datu struktūras)
+  _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie ir būtiski programmas darbībai un loģikai. Šis nav pilns saraksts, bet tajā iekļautas galvenās       programmas daļas:_
+  * `DragonflyAnalyzer` — galvenā klase, kas atbild par datu apkopošanu, rezultātu aprēķināšanu un kopsavilkuma izveidi.
+  * `Dragonfly` — klase, kas reprezentē vienu spāres sugu un saglabā ar to saistīto statistiku.
+  * `ErrorCollector` — kļūdu kolektors, kas apkopo visas izpildes laikā radušās kļūdas un palīdz ērti veikt atkļūdošanu.
+
+### 🖥️ Programmatūras izmantošanas metodes
+---
+
+1. Lietotājs palaiž programmu, izmantojot komandrindu:
+   ```bash
+   python app/main.py
+2. Tiek atvērta grafiskā saskarne, kas izveidota ar `tkinter`
+
+3. Saskarnē pieejamas šādas funkcijas:
+   * rezultātu faila formāta izvēle (Excel, XML, JSON)
+   * Excel failu pievienošana
+   * analīzes palaišanas poga
+   * programmas norises un kļūdu žurnāls
+
+4. Pēc palaišanas programma apstrādā failus un saglabā rezultātus lietotāja izvēlētajā vietā datorā.
+   
