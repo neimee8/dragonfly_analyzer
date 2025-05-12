@@ -83,7 +83,7 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
 ---
 
 #### Alternatīva pieeja (tikai Windows)
-1. Noklikšķināt uz `windows_run.bat` (Batch skripts izveidots ar ChatGPT rīka palīdzību)
+1. Noklikšķināt uz `windows_run.bat` (Batch skripts izveidots ar **ChatGPT rīka palīdzību**)
 2. Batch skripts pārbaudīs `Python` versiju un tā instālāciju
 3. Kā ārī Batch skirpts pārbaudīs nepieciešamas atkarības, un uzinstālē tos
 4. Ja viss iepriekš minēts izpildās veiksmīgi, grafiskā saskarne atvērsies automātiski!
