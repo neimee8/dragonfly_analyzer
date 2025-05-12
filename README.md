@@ -1,5 +1,5 @@
 # Dragonfly Analyzer
-<img src="ui/assets/img/preview.jpg" alt="Dragonfly Analyzer" width="600"/>
+<img src="ui/assets/img/preview.jpg" alt="Dragonfly Analyzer" width="1280"/>
 
 ### 📹 Demonstrācija
 --- 
