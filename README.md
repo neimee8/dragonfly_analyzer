@@ -96,8 +96,8 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
 
 1. Noklikšķināt uz `windows_run.bat` (Batch skripts izveidots ar **ChatGPT rīka palīdzību**)
 
-2. Batch skripts pārbaudīs `Python` instalāciju un versiju
+2. Batch skripts pārbaudīs Python instalāciju un versiju
 
-3. Kā ārī Batch skirpts pārbaudīs nepieciešamas atkarības, un uzinstālē tos
+3. Pēc tam Batch skripts pārbaudīs nepieciešamas atkarības, un uzinstālē tos
 
 4. Ja viss iepriekš minēts izpildās veiksmīgi, grafiskā saskarne atvērsies automātiski!
