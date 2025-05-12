@@ -52,8 +52,8 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
   * `os` - izmantots darbam ar failiem failu sistēmā.
   * `typing` - izmantots tipu anotāciju norādīšanā.
   * `time` - izmantots programmas izpildes laika mērīšanai.
-  * `xml` - izmantots datu izvadīšanai XML formātā.
-  * `json` - izmantots datu serializācijai un ievadei/izvadei JSON formātā.
+  * `xml` - izmantots datu izvadīšanai `XML` formātā.
+  * `json` - izmantots datu serializācijai un ievadei/izvadei `JSON` formātā.
     
 ### 🧱 Projekta izstrādes laikā izmantotas pašdefinētas datu struktūras 
 ---
