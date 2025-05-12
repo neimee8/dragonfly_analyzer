@@ -60,6 +60,7 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
 
 * `HashTable` — pielāgota datu struktūra, kas atkārto `dict` uzvedību. Tās izmērs tiek dinamiski palielināts (kad piepildījums sasniedz 70%), nodrošinot efektīvu darbību ar lieliem datu apjomiem.
 * `ProcessSafeQueue` - pielāgota datu struktūra, kas atkārto `multiprocessing.Queue` uzvedību. Tika izmantots datu apmaiņai starp grafiska interfeisa procesu un procesu, kur izpildās operācijas ar failiem. Pamatā izmantota `LinkedList` struktūra, lai datu izņēmšanas sarežģitība būtu `O(1)`, un kad uzkrājas 1000 izlietotu elementu un rindā nav noderīgas informācijas, izpildās rindas tīrīšana (visi elementi sarakstā tiek dzēsti). Papildus, ir izveidots pašdefinēts izņēmums `EmptyProcessSafeQueueError`, kas tiek izsaukts pēc datu izņēmšanas mēģinājuma, ja rinda ir tukšā.
+---
 
 #### 🧩 Pārējās svarīgākās programmas daļas (kas nav datu struktūras)
 _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie ir būtiski programmas darbībai un loģikai. Šis nav pilns saraksts, bet tajā iekļautas galvenās       programmas daļas:_
