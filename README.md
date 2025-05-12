@@ -45,7 +45,7 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
   * `pathlib` - ceļu un failu struktūras apstrādei.
   * `numbers`- abstraktu skaitlisko tipu pārbaudei un validācijai.
   * `re` - regulāro izteiksmju izmantošanai (piemēram, failu nosaukumu apstrādei).
-  * `multiprocessing` - ļauj organizēt aprēķinu paralēlismu, izveidojot apakšprocesus.
+  * `multiprocessing` - izmantots lai paralēlizēt grafiska interfeisa atjaunošanu un failu operāciju izpildi.
   * `tkinter` - izmantots grafiska interfeisa izstrādei.
   * `dataclasses` - lai būtu iespējams izmantot @dataclass dekoratoru.
   * `os` - izmantots darbam ar failiem failu sistēmā.
@@ -58,12 +58,18 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
 ---
 
 * `HashTable` — pielāgota datu struktūra, kas atkārto `dict` uzvedību. Tās izmērs tiek dinamiski palielināts (kad piepildījums sasniedz 70%), nodrošinot efektīvu darbību ar lieliem datu apjomiem.
+* `ProcessSafeQueue` - pielāgota datu struktūra, kas atkārto `multiprocessing.Queue` uzvedību. Tika izmantots datu apmaiņai starp grafiska interfeisa procesu un procesu, kur izpildās operācijas ar failiem. Pamatā izmantota LinkedList struktūra, lai datu izņēmšanas sarežģitība būtu `O(1)`, un kad uzkrājas 1000 izlietotu elementu un rindā nav noderīgas informācijas, izpildās rindas tīrīšana (visi elementi sarakstā tiek dzēsti). Papildus, ir izveidots pašdefinēts izņēmums `EmptyProcessSafeQueueError`, kas tiek izsaukts pēc datu izņēmšanas mēģinājuma, ja rinda ir tukšā.
 
   #### 🧩 Pārējās svarīgākās programmas daļas (kas nav datu struktūras)
   _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie ir būtiski programmas darbībai un loģikai. Šis nav pilns saraksts, bet tajā iekļautas galvenās       programmas daļas:_
   * `DragonflyAnalyzer` — galvenā klase, kas atbild par datu apkopošanu, rezultātu aprēķināšanu un kopsavilkuma izveidi.
   * `Dragonfly` — klase, kas reprezentē vienu spāres sugu un saglabā ar to saistīto statistiku.
   * `ErrorCollector` — kļūdu kolektors, kas apkopo visas izpildes laikā radušās kļūdas un palīdz ērti veikt atkļūdošanu.
+  * `UICommandHandler` — klase, kas ietver sevī grafiska interfeisa notikumu apstrādi, kā arī izpildā ievades datu validāciju un procesa, kur izpildās operācijas ar failiem, palaišanu.
+  * `WidgetManager` — klase, kas palīdz strukturēt darbu ar `tkinter` logrīkiem, nodrošinot to pārvaldību, izvietošanu un organizāciju lietotāja saskarnē.
+  * `Tooltip` — klase, kas ir pašdefinēts tkinter logrīks, kas atkārto `HTML title` atribūta uzvedību.
+  * `StyleManager` - klase, kas apkopo stilus no `JSON` faila un pārvērš tos `ttk.Style` objektā.
+  * `FileWriter`, `JsonWriter`, `XmlWriter` - klases, kas nodrošinā datu izvadi failā `JSON` un `XML` formātā.
 
 ### 🖥️ Programmatūras izmantošanas metodes
 ---
