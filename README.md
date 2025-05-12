@@ -74,19 +74,22 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
 
 ### 🖥️ Programmatūras izmantošanas metodes
 ---
-
-1. Lietotājs palaiž programmu, izmantojot komandrindu:
+1. Atkarību instalācija
+   ```bash
+   pip install -r requirements.txt
+   
+2. Lietotājs palaiž programmu, izmantojot komandrindu:
    ```bash
    python app/main.py
-2. Tiek atvērta grafiskā saskarne, kas izveidota ar `tkinter`
+3. Tiek atvērta grafiskā saskarne, kas izveidota ar `tkinter`
 
-3. Saskarnē pieejamas šādas funkcijas:
+4. Saskarnē pieejamas šādas funkcijas:
    * rezultātu faila formāta izvēle (Excel, XML, JSON)
    * Excel failu pievienošana
    * analīzes palaišanas poga
    * programmas norises un kļūdu žurnāls
 
-4. Pēc palaišanas programma apstrādā failus un saglabā rezultātus lietotāja izvēlētajā vietā datorā.
+5. Pēc palaišanas programma apstrādā failus un saglabā rezultātus lietotāja izvēlētajā vietā datorā.
 ---
 
 #### Alternatīva pieeja (tikai Windows)
