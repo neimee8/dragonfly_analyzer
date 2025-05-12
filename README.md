@@ -29,7 +29,7 @@ Programma apstrādā Excel failus ([datu faila piemērs](_datafiles/1_Calopteryx
 
 Programma neaizstāj biologu, bet automatizē rutīnas aprēķinus un pārskatu struktūras izveidi, ļaujot speciālistiem koncentrēties uz datu interpretāciju, kā arī izmantot rezultātus nākamajos, sarežģītākos analīzes posmos, piemēram, TWINSPAN klasifikācijā.
 
-Rezultāta pārskatu iespējams saglabāt trīs dažādos formātos: **JSON**, **XML** vai **Excel** atkarībā no lietotāja izvēles.
+Rezultāta pārskatu iespējams saglabāt trīs dažādos formātos: **JSON**, **XML** vai **Excel** atkarībā no lietotāja izvēles ([rezultātu piemērs](_datafiles/results)).
 
 Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam studentam biologam paātrināt datu sagatavošanu viņa bakalaura darbam bioloģijā.
 
