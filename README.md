@@ -93,7 +93,7 @@ _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie
 5. Pēc palaišanas programma apstrādā failus un saglabā rezultātus lietotāja izvēlētajā vietā datorā.
 ---
 
-#### Alternatīva pieeja (tikai Windows)
+#### 🔮 Alternatīva pieeja (tikai Windows)
 
 1. Noklikšķināt uz `windows_run.bat` (Batch skripts izveidots ar **ChatGPT rīka palīdzību**)
 
