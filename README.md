@@ -39,11 +39,20 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
   #### 📦 Trešo pušu bibliotēkas:
   * `pandas` — datu tabulu analīzei; izmantota datu ielādei un apstrādei no Excel failiem.
   * `openpyxl` — Excel failu lasīšanai un rakstīšanai ar formatējumu.
+  * `Pillow` - izmantots darbam ar attēliem grafiskā interfeisā.
 
   #### 🧰 Standarta Python moduļi:
   * `pathlib` - ceļu un failu struktūras apstrādei.
   * `numbers`- abstraktu skaitlisko tipu pārbaudei un validācijai.
   * `re` - regulāro izteiksmju izmantošanai (piemēram, failu nosaukumu apstrādei).
+  * `multiprocessing` - ļauj organizēt aprēķinu paralēlismu, izveidojot apakšprocesus.
+  * `tkinter` - izmantots grafiska interfeisa izstrādei.
+  * `dataclasses` - lai būtu iespējams izmantot @dataclass dekoratoru.
+  * `os` - izmantots darbam ar failiem failu sistēmā.
+  * `typing` - izmantots tipu anotāciju norādīšanā.
+  * `time` - izmantots programmas izpildes laika mērīšanai.
+  * `xml` - izmantots datu izvadīšanai XML formātā.
+  * `json` - izmantots datu serializācijai un ievadei/izvadei JSON formātā.
     
 ### 🧱 Projekta izstrādes laikā izmantotas pašdefinētas datu struktūras 
 ---
