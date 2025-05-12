@@ -10,7 +10,7 @@
 ---
 
 **Dragonfly Analyzer** ir rīks, kas automatizēti apkopo un sagatavo statistikas pārskatus, pamatojoties uz lauka novērojumiem par spārēm.
-Tas paredzēts biologi un ekologi atbalstam, kuri strādā ar indikatoru sugām — sugām, kuru skaits ir īpaši jutīgs pret vides pārmaiņām.
+Tas paredzēts biologu un ekologu atbalstam, kuri strādā ar indikatoru sugām — sugām, kuru skaits ir īpaši jutīgs pret vides pārmaiņām.
 
 Programma apstrādā Excel failus ([datu faila piemērs](_datafiles/1_Calopteryx%20splendens.xlsx)) ar datiem par sugām un veido kopsavilkuma pārskatu.
 
