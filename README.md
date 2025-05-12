@@ -4,7 +4,7 @@
 ### 📹 Demonstrācija
 --- 
 
-* [Saite uz video demonstrāciju]([https://youtu.be/tavs-video-links](https://www.youtube.com/watch?v=q-MgwmnXWBw&ab_channel=BogdansKologrivovs))
+[Saite uz video demonstrāciju]([https://youtu.be/tavs-video-links](https://www.youtube.com/watch?v=q-MgwmnXWBw&ab_channel=BogdansKologrivovs))
 ### 📌 Projekta uzdevums
 ---
 
