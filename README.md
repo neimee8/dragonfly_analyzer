@@ -1,4 +1,4 @@
-# Dragonfly Analyzer
+<h1 align="center">Dragonfly Analyzer</h1>
 <img src="ui/assets/img/preview.jpg" alt="Dragonfly Analyzer" width="1280"/>
 
 ### 📹 Demonstrācija
