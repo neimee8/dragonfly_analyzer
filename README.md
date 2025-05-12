@@ -48,7 +48,7 @@ Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam st
   * `re` - regulāro izteiksmju izmantošanai (piemēram, failu nosaukumu apstrādei).
   * `multiprocessing` - izmantots lai paralēlizēt grafiska interfeisa atjaunošanu un failu operāciju izpildi.
   * `tkinter` - izmantots grafiska interfeisa izstrādei.
-  * `dataclasses` - lai būtu iespējams izmantot @dataclass dekoratoru.
+  * `dataclasses` - lai būtu iespējams izmantot `@dataclass` dekoratoru.
   * `os` - izmantots darbam ar failiem failu sistēmā.
   * `typing` - izmantots tipu anotāciju norādīšanā.
   * `time` - izmantots programmas izpildes laika mērīšanai.
