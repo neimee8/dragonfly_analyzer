@@ -38,6 +38,21 @@ class XmlWriter(FileWriter):
             elements['total_count_by_square'][key].set('square', str(key))
             elements['total_count_by_square'][key].text = str(val)
 
+        elements['square_year_count'] = {}
+        elements['square_year_count']['root'] = et.SubElement(elements['count'], 'SquareYearCount')
+        squares = []
+
+        for el in self.dragonfly.square_year_count:
+            if el['square'] not in squares:
+                squares.append(el['square'])
+
+                elements['square_year_count'][el['square']] = et.SubElement(elements['square_year_count']['root'], 'Square')
+                elements['square_year_count'][el['square']].set('square', str(el['square']))
+
+            elements['square_year_count'][str(el['square']) + str(el['year'])] = et.SubElement(elements['square_year_count'][el['square']], 'Count')
+            elements['square_year_count'][str(el['square']) + str(el['year'])].set('year', str(el['year']))
+            elements['square_year_count'][str(el['square']) + str(el['year'])].text = str(el['count'])
+
         elements['temperature'] = et.SubElement(root, 'Temperature')
 
         elements['avg_temp_by_year'] = {}

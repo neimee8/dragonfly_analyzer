@@ -17,6 +17,7 @@ class JsonWriter(FileWriter):
         data = {}
         square_year_data = HashTable()
 
+        square_year_data['count'] = self.dragonfly.square_year_count
         square_year_data['temp'] = self.dragonfly.square_year_temp
         square_year_data['wind'] = self.dragonfly.square_year_wind
         square_year_data['clouds'] = self.dragonfly.square_year_clouds
@@ -40,6 +41,7 @@ class JsonWriter(FileWriter):
         data['count']['total_count'] = self.dragonfly.total_count
         data['count']['count_by_year'] = self.dragonfly.count_by_year.to_dict()
         data['count']['count_by_square'] = self.dragonfly.count_by_square.to_dict()
+        data['count']['square_year_count'] = square_year_data.to_dict()['count']
 
         data['temperature'] = {}
         data['temperature']['avg_temperature_by_year'] = self.dragonfly.avg_temp_by_year.to_dict()
