@@ -32,7 +32,7 @@ Programma automatizē rutīnas aprēķinus un pārskatu struktūras izveidi, ļa
 
 Rezultāta pārskatu iespējams saglabāt trīs dažādos formātos: **JSON**, **XML** vai **Excel** atkarībā no lietotāja izvēles ([rezultātu piemērs](_datafiles/results)).
 
-Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam studentam biologam paātrināt datu sagatavošanu viņa bakalaura darbam bioloģijā.
+Projekts radās kā risinājums reālai problēmai — palīdzēt pazīstamam pētniekam paātrināt datu sagatavošanu viņa bakalaura darbam bioloģijā.
 
 ### 🐍 Python bibliotēkas izmantotas projekta izstrādes laikā
 ---
