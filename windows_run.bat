@@ -1,5 +1,3 @@
-:: Made with ChatGPT!!!
-
 @echo off
 setlocal
 
