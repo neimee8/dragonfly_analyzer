@@ -102,3 +102,6 @@ _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie
 3. Pēc tam Batch skripts pārbaudīs nepieciešamas atkarības, un uzinstālē tos
 
 4. Ja viss iepriekš minēts izpildās veiksmīgi, grafiskā saskarne atvērsies automātiski!
+---
+
+Kopīga izstrāde ar @lbrezgin. Sinhronizēta kopija - https://github.com/lbrezgin/dragonfly_analyzer.
