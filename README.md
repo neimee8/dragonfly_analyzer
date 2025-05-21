@@ -91,7 +91,9 @@ _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie
    * programmas norises un kļūdu žurnāls
 
 5. Pēc palaišanas programma apstrādā failus un saglabā rezultātus lietotāja izvēlētajā vietā datorā.
+
 ---
+
 
 #### 🔮 Alternatīva pieeja (tikai Windows)
 
