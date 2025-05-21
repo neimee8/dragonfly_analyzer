@@ -95,7 +95,7 @@ _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie
 
 #### 🔮 Alternatīva pieeja (tikai Windows)
 
-1. Noklikšķināt uz `windows_run.bat` (Batch skripts izveidots ar **ChatGPT rīka palīdzību**)
+1. Noklikšķināt uz `windows_run.bat`
 
 2. Batch skripts pārbaudīs Python instalāciju un versiju
 
