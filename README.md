@@ -104,4 +104,4 @@ _Lai gan zemāk minētie komponenti nav klasificējami kā datu struktūras, tie
 4. Ja viss iepriekš minēts izpildās veiksmīgi, grafiskā saskarne atvērsies automātiski!
 ---
 
-<p align="center">Kopīga izstrāde ar <a href="https://github.com/lbrezgin/">@lbrezgin</a>. Sinhronizēta kopija [šeit](https://github.com/lbrezgin/dragonfly_analyzer).</p>
+<p align="center"><strong>Kopīga izstrāde ar <a href="https://github.com/lbrezgin/">@lbrezgin</a>.</strong> Sinhronizēta kopija <a href="https://github.com/lbrezgin/dragonfly_analyzer">šeit</a>.</p>
