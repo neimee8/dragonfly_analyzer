@@ -102,6 +102,15 @@ _While the following components aren't data structures, they are essential to th
    - Check for required dependencies and install them if needed
 
 3. If all checks succeed, the graphical interface will open automatically!
+
+### License
+---
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
+### Authors
 ---
 
 <p align="center"><strong>Co-developed with <a href="https://github.com/lbrezgin/">@lbrezgin</a>.</strong> Synchronized copy <a href="https://github.com/lbrezgin/dragonfly_analyzer">here</a>.</p>
